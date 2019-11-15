@@ -91,7 +91,7 @@ namespace DatabaseApplication
                         }
                         Console.WriteLine("TwitchCommand----------> " + input); 
 
-                        if (message.Equals("!dJoin"))
+                        if (message.ToLower().Equals("!djoin"))
                         {
                             dbAdapter.SelectCommand = new OdbcCommand("SELECT * FROM users WHERE twitch_name='" + uname + "';", connDB);
                             dbAdapter.Fill(data);
