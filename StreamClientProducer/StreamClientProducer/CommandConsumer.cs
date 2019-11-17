@@ -7,17 +7,54 @@ using System.Threading;
 
 namespace StreamClientProducer
 {
+    /**
+     * This class provides the IPC functionality by subscribing to the COMMANDS topic on the Kafka server
+     */
     class CommandConsumer
     {
-        static string server = "Localhost:9092";
+        //Consts: Kafka Connection Information
+        //
+        //server - The server information
+        //topic - The Kafak topic to subscribe to
+        const string server = "Localhost:9092";
+        const string topic = "COMMANDS";
+
+        //var: Active
+        //
+        //Manages the main loop in <CommandThread>
         private bool Active;
-        string topic = "COMMANDS";
+
+        //obj: controller
+        //
+        //The <ThreadController> that instanciated this obj.
+        //Access is necesary to allow IPC commands to propagate through this Application
         ThreadController controller;
+
+        //obj: config
+        //
+        //The configuration for the Kafka client
         ConsumerConfig config;
+
+        //objs: Cancellation
+        //
+        //canceltoken - a taken passed to the Kafka client
+        //source - the source for <canceltoken>
         CancellationToken canceltoken;
         CancellationTokenSource source;
+
+        //obj: blacklist
+        //
+        //a list of users to ignore messages from, passed in from <THreadController>
         HashSet<string> blacklist;
 
+        /**
+         * The constructor for <CommandConsumer>
+         * Generates the configuraiton for the Kafka client.
+         * 
+         * Parameters:
+         * controller - the <ThreadConstroller> that created this object
+         * blacklist - a refrence to the shared <blacklist> object owned by <ThreadConstroller>
+         */
         public CommandConsumer(ThreadController controller, ref HashSet<string> blacklist)
         {
             this.blacklist = blacklist;
@@ -37,10 +74,18 @@ namespace StreamClientProducer
             canceltoken = source.Token;
         }
 
+        /**
+         * The main loop to be run as a thread. Generates a Kafka client that checks 
+         * for new messages COMMANDS and then calls the appropriete function from <THreadController>
+         */
         public void CommandThread()
         {
             Console.WriteLine("CommandThread Start");
             Active = true;
+            //Objs: Kafka Client
+            //
+            //consumer - the Kafka consumer that will connect to the Kafka server
+            //topicp - what partition to start looking for messages in.
             var consumer = new ConsumerBuilder<string, string>(config).Build();
             var topicp = new TopicPartition(topic, 0);
             consumer.Assign(topicp);
@@ -49,13 +94,26 @@ namespace StreamClientProducer
             {
                 try
                 {
+                    /**
+                     * the result of <consumer> checking for nes messages
+                     */
                     var consumeresult = consumer.Consume(canceltoken);
 
                     if (!consumeresult.IsPartitionEOF)
                     {
+                        /*
+                         * This section breaks down the message and then exicutes the appropriete command
+                         */
+
+                        //Vars: Commad Strings
+                        //
+                        //input - the raw message
+                        //command - the part of the message that specifies what function to exicute
+                        //parameter - the part of a message that may be passed into a function at exicution
                         var input = consumeresult.Value;
                         string command;
                         string parameter;
+
                         if (input.Contains(" "))
                         {
                             command = input.Substring(0, input.IndexOf(" ")).Trim();
@@ -70,11 +128,11 @@ namespace StreamClientProducer
 
                         if (command.Equals("Add-Channel"))
                         {
-                            controller.addThread(parameter);
+                            controller.addClient(parameter);
                         }
                         else if (command.Equals("Drop-Channel"))
                         {
-                            controller.dropThread(parameter);
+                            controller.dropClient(parameter);
                         }
                         else if (command.Equals("SCPList-Channels"))
                         {
@@ -115,6 +173,9 @@ namespace StreamClientProducer
             }
         }
     
+        /**
+         * Ends the primary loop and allows the thread to end.
+         */
         public void Kill()
         {
             source.Cancel();

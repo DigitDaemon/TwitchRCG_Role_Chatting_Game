@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("File2:GameApplication/Abstracts/Encounter.cs","Encounter.cs");NDSummary.OnSummaryLoaded("File2:GameApplication/Abstracts/Encounter.cs",[["C#","CSharp"]],[["Classes","Class"]],[[133,0,0,"<span class=\"Qualifier\">GameApplication.</span>&#8203;Encounter","GameApplication.Encounter"]]);

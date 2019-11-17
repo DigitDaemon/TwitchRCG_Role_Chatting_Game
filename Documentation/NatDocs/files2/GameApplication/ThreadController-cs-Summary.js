@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("File2:GameApplication/ThreadController.cs","ThreadController.cs");NDSummary.OnSummaryLoaded("File2:GameApplication/ThreadController.cs",[["C#","CSharp"]],[["Classes","Class"]],[[189,0,0,"<span class=\"Qualifier\">GameApplication.</span>&#8203;ThreadController","GameApplication.ThreadController"]]);

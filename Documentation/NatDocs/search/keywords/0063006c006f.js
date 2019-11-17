@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("clo",["Function"],[["closeClassResources",,[["StreamClientProducer.TwitchClient",,,,0,"File:StreamClientProducer/TwitchClient.cs:StreamClientProducer.TwitchClient.closeClassResources","CSharpClass:StreamClientProducer.TwitchClient:closeClassResources"]]]]);

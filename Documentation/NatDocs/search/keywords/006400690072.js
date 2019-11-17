@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("dir",["Class"],[["DireWolf",,[["GameApplication.Agents",,,,0,"File2:GameApplication/Agents/DireWolf.cs:GameApplication.Agents.DireWolf","CSharpClass:GameApplication.Agents.DireWolf"]]]]);

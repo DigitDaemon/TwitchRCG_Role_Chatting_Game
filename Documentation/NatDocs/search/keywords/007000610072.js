@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("par",["Variable"],[["parameter",,[["StreamClientProducer.CommandConsumer",,,,0,"File:StreamClientProducer/CommandConsumer.cs:StreamClientProducer.CommandConsumer.parameter","CSharpClass:StreamClientProducer.CommandConsumer:parameter"]]]]);

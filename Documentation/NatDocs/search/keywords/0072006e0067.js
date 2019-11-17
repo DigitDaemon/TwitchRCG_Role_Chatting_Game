@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("rng",["Variable"],[["rng",,[["GameApplication.Agent",,,,0,"File2:GameApplication/Abstracts/Agent.cs:GameApplication.Agent.rng","CSharpClass:GameApplication.Agent:rng"]]]]);

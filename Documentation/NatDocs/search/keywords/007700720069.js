@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("wri",["Variable"],[["writer",,[["StreamClientProducer.TwitchClient",,,,0,"File:StreamClientProducer/TwitchClient.cs:StreamClientProducer.TwitchClient.writer","CSharpClass:StreamClientProducer.TwitchClient:writer"]]]]);

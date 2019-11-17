@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("CSharpClass:GameApplication.Program","Program");NDSummary.OnSummaryLoaded("CSharpClass:GameApplication.Program",[["C#","CSharp"]],[["Classes","Class"],["Functions","Function"],["Groups","Group"]],[[190,0,0,"<span class=\"Qualifier\">GameApplication.</span>&#8203;Program"],[191,0,2,"Functions","Functions"],[192,0,1,"Main","Main"]]);

@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("sav",["Function"],[["SaveModel",,[["DatabaseApplicationML.ConsoleApp.ModelBuilder",,,,0,"File3:DatabaseApplicationML.ConsoleApp/ModelBuilder.cs:DatabaseApplicationML.ConsoleApp.ModelBuilder.SaveModel","CSharpClass:DatabaseApplicationML.ConsoleApp.ModelBuilder:SaveModel"]]]]);

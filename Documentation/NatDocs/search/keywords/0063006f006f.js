@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("coo",["Variable"],[["CooldownList",,[["GameApplication.EncounterController",,,,0,"File2:GameApplication/Threads/EncounterController.cs:GameApplication.EncounterController.CooldownList","CSharpClass:GameApplication.EncounterController:CooldownList"]]]]);

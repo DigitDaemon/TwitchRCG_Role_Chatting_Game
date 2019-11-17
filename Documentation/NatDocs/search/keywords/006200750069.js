@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("bui",["Function"],[["BuildTrainingPipeline",,[["DatabaseApplicationML.ConsoleApp.ModelBuilder",,,,0,"File3:DatabaseApplicationML.ConsoleApp/ModelBuilder.cs:DatabaseApplicationML.ConsoleApp.ModelBuilder.BuildTrainingPipeline","CSharpClass:DatabaseApplicationML.ConsoleApp.ModelBuilder:BuildTrainingPipeline"]]]]);

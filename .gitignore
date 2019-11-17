@@ -262,3 +262,6 @@ __pycache__/
 
 #Sensitive Data
 Data/
+
+#Documentation configuration
+NatDocs_config/

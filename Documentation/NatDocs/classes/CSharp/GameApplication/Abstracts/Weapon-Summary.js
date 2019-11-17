@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("CSharpClass:GameApplication.Abstracts.Weapon","Weapon");NDSummary.OnSummaryLoaded("CSharpClass:GameApplication.Abstracts.Weapon",[["C#","CSharp"]],[["Classes","Class"]],[[140,0,0,"<span class=\"Qualifier\">GameApplication.&#8203;Abstracts.</span>&#8203;Weapon"]]);

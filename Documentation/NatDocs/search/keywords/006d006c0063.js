@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("mlc",["Variable"],[["mlContext",,[["DatabaseApplicationML.ConsoleApp.ModelBuilder",,,,0,"File3:DatabaseApplicationML.ConsoleApp/ModelBuilder.cs:DatabaseApplicationML.ConsoleApp.ModelBuilder.mlContext","CSharpClass:DatabaseApplicationML.ConsoleApp.ModelBuilder:mlContext"]]]]);

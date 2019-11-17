@@ -1,0 +1,1 @@
+NDSummary.OnToolTipsLoaded("File2:GameApplication/Encounters/MonsterEncounter.cs",{183:"<div class=\"NDToolTip TClass LCSharp\"><div class=\"NDClassPrototype\" id=\"NDClassPrototype183\"><div class=\"CPEntry TClass Current\"><div class=\"CPName\"><span class=\"Qualifier\">GameApplication.</span>&#8203;MonsterEncounter</div></div></div></div>"});

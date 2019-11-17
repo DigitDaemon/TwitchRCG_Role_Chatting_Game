@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("rea",["Variable"],[["reader",,[["StreamClientProducer.TwitchClient",,,,0,"File:StreamClientProducer/TwitchClient.cs:StreamClientProducer.TwitchClient.reader","CSharpClass:StreamClientProducer.TwitchClient:reader"]]]]);

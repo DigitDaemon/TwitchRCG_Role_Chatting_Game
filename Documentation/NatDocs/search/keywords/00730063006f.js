@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("sco",["Property"],[["Score",,[["DatabaseApplicationML.Model.ModelOutput",,,,0,"File3:DatabaseApplicationML.Model/ModelOutput.cs:DatabaseApplicationML.Model.ModelOutput.Score","CSharpClass:DatabaseApplicationML.Model.ModelOutput:Score"]]]]);

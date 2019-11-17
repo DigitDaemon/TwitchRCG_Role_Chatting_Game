@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("dea",["Class"],[["DeathException",,[["GameApplication.Exceptions",,,,0,"File2:GameApplication/Exceptions/DeathException.cs:GameApplication.Exceptions.DeathException","CSharpClass:GameApplication.Exceptions.DeathException"]]]]);

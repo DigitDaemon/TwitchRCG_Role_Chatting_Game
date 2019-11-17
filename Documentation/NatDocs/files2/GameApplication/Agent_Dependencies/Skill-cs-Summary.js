@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("File2:GameApplication/Agent_Dependencies/Skill.cs","Skill.cs");NDSummary.OnSummaryLoaded("File2:GameApplication/Agent_Dependencies/Skill.cs",[["C#","CSharp"]],[["Classes","Class"]],[[166,0,0,"<span class=\"Qualifier\">GameApplication.&#8203;Agent_Dependencies.</span>&#8203;Skill","GameApplication.Agent_Dependencies.Skill"]]);

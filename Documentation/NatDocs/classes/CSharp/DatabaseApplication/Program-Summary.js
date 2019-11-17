@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("CSharpClass:DatabaseApplication.Program","Program");NDSummary.OnSummaryLoaded("CSharpClass:DatabaseApplication.Program",[["C#","CSharp"]],[["Classes","Class"],["Functions","Function"],["Groups","Group"]],[[1,0,0,"<span class=\"Qualifier\">DatabaseApplication.</span>&#8203;Program"],[2,0,2,"Functions","Functions"],[3,0,1,"Main","Main"]]);

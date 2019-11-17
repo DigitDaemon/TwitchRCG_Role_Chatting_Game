@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("inf",["Constant"],[["Information",,[["StreamClientProducer.CommandConsumer","Kafka Connection Information",,,0,"File:StreamClientProducer/CommandConsumer.cs:StreamClientProducer.CommandConsumer.Kafka_Connection_Information","CSharpClass:StreamClientProducer.CommandConsumer:Kafka_Connection_Information"]]]]);

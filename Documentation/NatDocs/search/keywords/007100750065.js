@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("que",["Function"],[["queueSize",,[["StreamClientProducer.ThreadController",,,,0,"File:StreamClientProducer/ThreadController.cs:StreamClientProducer.ThreadController.queueSize","CSharpClass:StreamClientProducer.ThreadController:queueSize"]]]]);

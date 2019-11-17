@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("CSharpClass:GameApplication.Agent_Dependencies.Armour","Armour");NDSummary.OnSummaryLoaded("CSharpClass:GameApplication.Agent_Dependencies.Armour",[["C#","CSharp"]],[["Classes","Class"]],[[168,0,0,"<span class=\"Qualifier\">GameApplication.&#8203;Agent_Dependencies.</span>&#8203;Armour"]]);

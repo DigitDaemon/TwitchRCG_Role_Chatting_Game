@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("pas",["Variable"],[["password",,[["StreamClientProducer.TwitchClient",,,,0,"File:StreamClientProducer/TwitchClient.cs:StreamClientProducer.TwitchClient.password","CSharpClass:StreamClientProducer.TwitchClient:password"]]]]);

@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("min",["Variable"],[["mInput",,[["DatabaseApplication.TwitchMessageConsumer",,,,0,"File3:DatabaseApplication/TwitchMessageConsumer.cs:DatabaseApplication.TwitchMessageConsumer.mInput","CSharpClass:DatabaseApplication.TwitchMessageConsumer:mInput"]]]]);

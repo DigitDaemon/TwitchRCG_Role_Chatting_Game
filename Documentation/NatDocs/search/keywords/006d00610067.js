@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("mag",["Function"],[["magicAttack",,[["GameApplication.Agent",,,,0,"File2:GameApplication/Abstracts/Agent.cs:GameApplication.Agent.magicAttack","CSharpClass:GameApplication.Agent:magicAttack"]]]]);

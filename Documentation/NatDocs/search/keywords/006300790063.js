@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("cyc",["Variable"],[["cycles",,[["StreamClientProducer.TwitchClient",,,,0,"File:StreamClientProducer/TwitchClient.cs:StreamClientProducer.TwitchClient.cycles","CSharpClass:StreamClientProducer.TwitchClient:cycles"]]]]);
