@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("rac",["Property"],[["race",,[["DatabaseApplication.UserProfile",,,,0,"File3:DatabaseApplication/UserProfile.cs:DatabaseApplication.UserProfile.race","CSharpClass:DatabaseApplication.UserProfile:race"]]]]);

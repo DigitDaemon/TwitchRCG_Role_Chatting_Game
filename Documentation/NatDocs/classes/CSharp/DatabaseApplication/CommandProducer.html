@@ -8,52 +8,84 @@
 
 <body onload="NDLoader.OnLoad('Content');" class="NDPage NDContentPage">
 
-<a name="Topic4"></a><div class="CTopic TClass LCSharp first">
+<a name="Topic1"></a><div class="CTopic TClass LCSharp first">
  <div class="CTitle"><span class="Qualifier">DatabaseApplication.</span>&#8203;CommandProducer</div>
- <div class="NDClassPrototype" id="NDClassPrototype4"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;CommandProducer</div></div></div>
+ <div class="NDClassPrototype" id="NDClassPrototype1"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;CommandProducer</div></div></div>
+ <div class="CBody"><p>This class will produce commands to the Kafka topic COMMANDS to facilitate IPC</p></div>
 </div>
 
 <a name="Variables"></a><a name="Topic5"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Variables</div>
 </div>
 
-<a name="server"></a><a name="Topic6"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">server</div>
- <div id="NDPrototype6" class="NDPrototype NoParameterForm"><span class="SHKeyword">static</span> <span class="SHKeyword">string</span> server</div>
+<a name="Kafka_producer_configs"></a><a name="Topic3"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka producer configs</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="server"></a><a name="Topic59"></a>server</td><td class="CDLDefinition"><p>the Kafka server to publish to</p></td></tr><tr><td class="CDLEntry"><a name="config"></a><a name="Topic60"></a>config</td><td class="CDLDefinition"><p>an object containing the configuration for the kafka client</p></td></tr></table></div>
 </div>
 
-<a name="Active"></a><a name="Topic7"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">Active</div>
- <div id="NDPrototype7" class="NDPrototype NoParameterForm"><span class="SHKeyword">private</span> <span class="SHKeyword">bool</span> Active</div>
-</div>
-
-<a name="config"></a><a name="Topic8"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">config</div>
- <div id="NDPrototype8" class="NDPrototype NoParameterForm">ProducerConfig config</div>
-</div>
-
-<a name="messageQueue"></a><a name="Topic9"></a><div class="CTopic TVariable LCSharp">
+<a name="messageQueue"></a><a name="Topic61"></a><div class="CTopic TVariable LCSharp">
  <div class="CTitle">messageQueue</div>
- <div id="NDPrototype9" class="NDPrototype NoParameterForm">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt; messageQueue</div>
+ <div id="NDPrototype61" class="NDPrototype NoParameterForm">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt; messageQueue</div>
+ <div class="CBody"><p>the queue of messages to publish to Kafka.&nbsp; this is shared by the <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer:CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,63);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,4);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> and the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,66);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a></p></div>
+</div>
+
+<a name="Active"></a><a name="Topic62"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Active</div>
+ <div id="NDPrototype62" class="NDPrototype NoParameterForm"><span class="SHKeyword">private</span> <span class="SHKeyword">bool</span> Active</div>
+ <div class="CBody"><p>controls the primary loop of <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer:CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,63);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a></p></div>
 </div>
 
 <a name="Functions"></a><a name="Topic10"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="CommandProducer"></a><a name="Topic11"></a><div class="CTopic TFunction LCSharp">
+<a name="CommandProducer"></a><a name="Topic63"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">CommandProducer</div>
- <div id="NDPrototype11" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> CommandProducer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PModifierQualifier first"><span class="SHKeyword">ref</span>&nbsp;</td><td class="PType">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;&nbsp;</td><td class="PName last">messageQueue</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype63" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> CommandProducer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PModifierQualifier first"><span class="SHKeyword">ref</span>&nbsp;</td><td class="PType">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;&nbsp;</td><td class="PName last">messageQueue</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div class="CBody"><p>The constructor for <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer:CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,63);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a></p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">messageQueue<div class="CDLParameterType"><span class="SHKeyword">ref</span> ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;</div></td><td class="CDLDefinition"><p>the queue shared between <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer:CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,63);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,4);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> and the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,66);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a></p></td></tr></table></div>
 </div>
 
-<a name="ProducerThread"></a><a name="Topic12"></a><div class="CTopic TFunction LCSharp">
+<a name="Variables(2)"></a><a name="Topic64"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Variables</div>
+</div>
+
+<a name="config(2)"></a><a name="Topic65"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">config</div>
+ <div class="CBody"><p>an object containing the configuration settings for the Kafka client</p></div>
+</div>
+
+<a name="Functions(2)"></a><a name="Topic259"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Functions</div>
+</div>
+
+<a name="ProducerThread"></a><a name="Topic260"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">ProducerThread</div>
- <div id="NDPrototype12" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> ProducerThread()</div>
+ <div id="NDPrototype260" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> ProducerThread()</div>
+ <div class="CBody"><p>This is the primary function of <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,33);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandConsumer</a> to be run as a thread</p></div>
 </div>
 
-<a name="Kill"></a><a name="Topic13"></a><div class="CTopic TFunction LCSharp last">
+<a name="Variables(3)"></a><a name="Topic261"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Variables</div>
+</div>
+
+<a name="count"></a><a name="Topic278"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">count</div>
+ <div class="CBody"><p>the number of times the function loops before voleentarily passing control</p></div>
+</div>
+
+<a name="producer"></a><a name="Topic280"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">producer</div>
+ <div class="CBody"><p>the Kafka producer client</p></div>
+</div>
+
+<a name="Functions(3)"></a><a name="Topic281"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Functions</div>
+</div>
+
+<a name="Kill"></a><a name="Topic282"></a><div class="CTopic TFunction LCSharp last">
  <div class="CTitle">Kill</div>
- <div id="NDPrototype13" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div id="NDPrototype282" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div class="CBody"><p>Ends the loop allowing the thread to close</p></div>
 </div>
 
 </body></html>

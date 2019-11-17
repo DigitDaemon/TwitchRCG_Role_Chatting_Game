@@ -8,33 +8,19 @@
 
 <body onload="NDLoader.OnLoad('Content');" class="NDPage NDContentPage">
 
-<a name="Topic14"></a><div class="CTopic TClass LCSharp first">
+<a name="Topic4"></a><div class="CTopic TClass LCSharp first">
  <div class="CTitle"><span class="Qualifier">DatabaseApplication.</span>&#8203;TwitchCommandConsumer</div>
- <div class="NDClassPrototype" id="NDClassPrototype14"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;TwitchCommandConsumer</div></div></div>
+ <div class="NDClassPrototype" id="NDClassPrototype4"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;TwitchCommandConsumer</div></div></div>
+ <div class="CBody"><p>This class handles any relevent commands entered into twitch coming through the twitch_command topic in Kafka</p></div>
 </div>
 
 <a name="Variables"></a><a name="Topic15"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Variables</div>
 </div>
 
-<a name="server"></a><a name="Topic16"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">server</div>
- <div id="NDPrototype16" class="NDPrototype NoParameterForm"><span class="SHKeyword">static</span> <span class="SHKeyword">string</span> server</div>
-</div>
-
-<a name="Active"></a><a name="Topic17"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">Active</div>
- <div id="NDPrototype17" class="NDPrototype NoParameterForm"><span class="SHKeyword">private</span> <span class="SHKeyword">bool</span> Active</div>
-</div>
-
-<a name="topic"></a><a name="Topic18"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">topic</div>
- <div id="NDPrototype18" class="NDPrototype NoParameterForm"><span class="SHKeyword">string</span> topic</div>
-</div>
-
-<a name="config"></a><a name="Topic19"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">config</div>
- <div id="NDPrototype19" class="NDPrototype NoParameterForm">ConsumerConfig config</div>
+<a name="Kafka_Consumer_Config"></a><a name="Topic6"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Consumer Config</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="server"></a><a name="Topic7"></a>server</td><td class="CDLDefinition"><p>the kafka server to connect to</p></td></tr><tr><td class="CDLEntry"><a name="topic"></a><a name="Topic8"></a>topic</td><td class="CDLDefinition"><p>the topic to subscribe to</p></td></tr><tr><td class="CDLEntry"><a name="config"></a><a name="Topic9"></a>config</td><td class="CDLDefinition"><p>an object containing configuration information for the Kafka connection</p></td></tr><tr><td class="CDLEntry"><a name="cancelToken"></a><a name="Topic11"></a>cancelToken</td><td class="CDLDefinition"><p>a token used to cancel a the Kafka consumer looing for new messages</p></td></tr><tr><td class="CDLEntry"><a name="source"></a><a name="Topic12"></a>source</td><td class="CDLDefinition"><p>the source of <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:cancelToken" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,11);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >cancelToken</a></p></td></tr></table></div>
 </div>
 
 <a name="canceltoken"></a><a name="Topic20"></a><div class="CTopic TVariable LCSharp">
@@ -42,9 +28,15 @@
  <div id="NDPrototype20" class="NDPrototype NoParameterForm">CancellationToken canceltoken</div>
 </div>
 
-<a name="source"></a><a name="Topic21"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">source</div>
- <div id="NDPrototype21" class="NDPrototype NoParameterForm">CancellationTokenSource source</div>
+<a name="Active"></a><a name="Topic13"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Active</div>
+ <div id="NDPrototype13" class="NDPrototype NoParameterForm"><span class="SHKeyword">private</span> <span class="SHKeyword">bool</span> Active</div>
+ <div class="CBody"><p>controls the primary loop in <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:TCCThread" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,324);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TCCThread</a></p></div>
+</div>
+
+<a name="commandeMessageQueue"></a><a name="Topic283"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">commandeMessageQueue</div>
+ <div class="CBody"><p>The queue for outgoing messages from this applicaiton to be placed in for publishing by <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> this is shared by the <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,323);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> and the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,66);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a></p></div>
 </div>
 
 <a name="commandMessageQueue"></a><a name="Topic22"></a><div class="CTopic TVariable LCSharp">
@@ -52,53 +44,59 @@
  <div id="NDPrototype22" class="NDPrototype NoParameterForm">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt; commandMessageQueue</div>
 </div>
 
-<a name="path"></a><a name="Topic23"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">path</div>
- <div id="NDPrototype23" class="NDPrototype NoParameterForm"><span class="SHKeyword">private static</span> <span class="SHKeyword">string</span> path</div>
+<a name="ODBC_configuration"></a><a name="Topic285"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">ODBC configuration</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="path"></a><a name="Topic286"></a>path</td><td class="CDLDefinition"><p>the path to the folder containing sensitive information for this project on my computer</p></td></tr><tr><td class="CDLEntry"><a name="dbConnString"></a><a name="Topic287"></a>dbConnString</td><td class="CDLDefinition"><p>the text contained inside the Connection.txt file with information for connecting to the database</p></td></tr></table></div>
 </div>
 
-<a name="dbConnString"></a><a name="Topic24"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">dbConnString</div>
- <div id="NDPrototype24" class="NDPrototype NoParameterForm"><span class="SHKeyword">static private</span> <span class="SHKeyword">string</span> dbConnString</div>
-</div>
-
-<a name="data"></a><a name="Topic25"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">data</div>
- <div id="NDPrototype25" class="NDPrototype NoParameterForm">DataSet data</div>
-</div>
-
-<a name="dbAdapter"></a><a name="Topic26"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">dbAdapter</div>
- <div id="NDPrototype26" class="NDPrototype NoParameterForm">OdbcDataAdapter dbAdapter</div>
-</div>
-
-<a name="dbCommand"></a><a name="Topic27"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">dbCommand</div>
- <div id="NDPrototype27" class="NDPrototype NoParameterForm">OdbcCommandBuilder dbCommand</div>
-</div>
-
-<a name="connDB"></a><a name="Topic28"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">connDB</div>
- <div id="NDPrototype28" class="NDPrototype NoParameterForm">OdbcConnection connDB</div>
+<a name="ODBS_objects"></a><a name="Topic318"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">ODBS objects</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="data"></a><a name="Topic319"></a>data</td><td class="CDLDefinition"><p>the data returned from a query</p></td></tr><tr><td class="CDLEntry"><a name="dbAdapter"></a><a name="Topic320"></a>dbAdapter</td><td class="CDLDefinition"><p>the object that handles retrival of data from the database</p></td></tr><tr><td class="CDLEntry"><a name="dbCommand"></a><a name="Topic321"></a>dbCommand</td><td class="CDLDefinition"><p>the command builder for <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:dbAdapter" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,320);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >dbAdapter</a></p></td></tr><tr><td class="CDLEntry"><a name="connDB"></a><a name="Topic322"></a>connDB</td><td class="CDLDefinition"><p>the connection to the database</p></td></tr></table></div>
 </div>
 
 <a name="Functions"></a><a name="Topic29"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="TwitchCommandConsumer"></a><a name="Topic30"></a><div class="CTopic TFunction LCSharp">
+<a name="TwitchCommandConsumer"></a><a name="Topic323"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">TwitchCommandConsumer</div>
- <div id="NDPrototype30" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> TwitchCommandConsumer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PModifierQualifier first"><span class="SHKeyword">ref</span>&nbsp;</td><td class="PType">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;&nbsp;</td><td class="PName last">commandMessageQueue</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype323" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> TwitchCommandConsumer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PModifierQualifier first"><span class="SHKeyword">ref</span>&nbsp;</td><td class="PType">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;&nbsp;</td><td class="PName last">commandMessageQueue</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div class="CBody"><p>The constructor for <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,323);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a></p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">commandMessageQueue<div class="CDLParameterType"><span class="SHKeyword">ref</span> ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;</div></td><td class="CDLDefinition"><p>The queue for outgoing messages from this applicaiton to be placed in for publishing by <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a></p></td></tr></table></div>
 </div>
 
-<a name="TCCThread"></a><a name="Topic31"></a><div class="CTopic TFunction LCSharp">
+<a name="TCCThread"></a><a name="Topic324"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">TCCThread</div>
- <div id="NDPrototype31" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> TCCThread()</div>
+ <div id="NDPrototype324" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> TCCThread()</div>
+ <div class="CBody"><p>This is the primary function of <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,323);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> and is to be run as a thread</p></div>
 </div>
 
-<a name="Kill"></a><a name="Topic32"></a><div class="CTopic TFunction LCSharp last">
+<a name="Variables(2)"></a><a name="Topic325"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Variables</div>
+</div>
+
+<a name="Kafka_Consumer_client"></a><a name="Topic326"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Consumer client</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="consumer"></a><a name="Topic327"></a>consumer</td><td class="CDLDefinition"><p>the Kafka consumer client</p></td></tr><tr><td class="CDLEntry"><a name="topicp"></a><a name="Topic328"></a>topicp</td><td class="CDLDefinition"><p>the topic partition from <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:consumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,327);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >consumer</a> to consume from</p></td></tr></table></div>
+</div>
+
+<a name="consumerresult"></a><a name="Topic329"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">consumerresult</div>
+ <div class="CBody"><p>The result of checking for the next new message on the Kafka server</p></div>
+</div>
+
+<a name="Kafka_Message"></a><a name="Topic330"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Message</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="input"></a><a name="Topic331"></a>input</td><td class="CDLDefinition"><p>the raw message from Kafka</p></td></tr><tr><td class="CDLEntry"><a name="channel"></a><a name="Topic332"></a>channel</td><td class="CDLDefinition"><p>the channel that the message was received from</p></td></tr><tr><td class="CDLEntry"><a name="uname"></a><a name="Topic333"></a>uname</td><td class="CDLDefinition"><p>the username of the user that sent the message</p></td></tr><tr><td class="CDLEntry"><a name="message"></a><a name="Topic334"></a>message</td><td class="CDLDefinition"><p>the actual message portion</p></td></tr><tr><td class="CDLEntry"><a name="parameter"></a><a name="Topic335"></a>parameter</td><td class="CDLDefinition"><p>a part of the message intended to be passed as a paremeter</p></td></tr></table></div>
+</div>
+
+<a name="Functions(2)"></a><a name="Topic336"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Functions</div>
+</div>
+
+<a name="Kill"></a><a name="Topic337"></a><div class="CTopic TFunction LCSharp last">
  <div class="CTitle">Kill</div>
- <div id="NDPrototype32" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div id="NDPrototype337" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div class="CBody"><p>This ends the loop in <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer:TCCThread" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,324);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TCCThread</a> and cancels any current attempt to fetch a new message allowing the thread to end.</p></div>
 </div>
 
 </body></html>

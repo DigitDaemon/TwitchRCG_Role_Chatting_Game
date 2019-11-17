@@ -17,9 +17,9 @@
  <div class="CTitle">Variables</div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.server"></a><a name="Topic68"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">server</div>
- <div id="NDPrototype68" class="NDPrototype NoParameterForm"><span class="SHKeyword">static</span> <span class="SHKeyword">string</span> server</div>
+<a name="DatabaseApplication.TwitchMessageConsumer.Kafka_Consumer_Config"></a><a name="Topic87"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Consumer Config</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.server"></a><a name="Topic89"></a>server</td><td class="CDLDefinition"><p>the kafka server to connect to</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.topic"></a><a name="Topic90"></a>topic</td><td class="CDLDefinition"><p>the topic to subscribe to</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.config"></a><a name="Topic91"></a>config</td><td class="CDLDefinition"><p>an object containing configuration information for the Kafka connection</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.cancelToken"></a><a name="Topic92"></a>cancelToken</td><td class="CDLDefinition"><p>a token used to cancel a the Kafka consumer looing for new messages</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.source"></a><a name="Topic94"></a>source</td><td class="CDLDefinition"><p>the source of <a href="../../index.html#File3:DatabaseApplication/TwitchMessageConsumer.cs:DatabaseApplication.TwitchMessageConsumer.cancelToken" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,92);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >cancelToken</a></p></td></tr></table></div>
 </div>
 
 <a name="DatabaseApplication.TwitchMessageConsumer.Active"></a><a name="Topic69"></a><div class="CTopic TVariable LCSharp">
@@ -27,24 +27,14 @@
  <div id="NDPrototype69" class="NDPrototype NoParameterForm"><span class="SHKeyword">private</span> <span class="SHKeyword">bool</span> Active</div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.topic"></a><a name="Topic70"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">topic</div>
- <div id="NDPrototype70" class="NDPrototype NoParameterForm"><span class="SHKeyword">string</span> topic</div>
-</div>
-
-<a name="DatabaseApplication.TwitchMessageConsumer.config"></a><a name="Topic71"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">config</div>
- <div id="NDPrototype71" class="NDPrototype NoParameterForm">ConsumerConfig config</div>
-</div>
-
 <a name="DatabaseApplication.TwitchMessageConsumer.canceltoken"></a><a name="Topic72"></a><div class="CTopic TVariable LCSharp">
  <div class="CTitle">canceltoken</div>
  <div id="NDPrototype72" class="NDPrototype NoParameterForm">CancellationToken canceltoken</div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.source"></a><a name="Topic73"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">source</div>
- <div id="NDPrototype73" class="NDPrototype NoParameterForm">CancellationTokenSource source</div>
+<a name="DatabaseApplication.TwitchMessageConsumer.commandeMessageQueue"></a><a name="Topic95"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">commandeMessageQueue</div>
+ <div class="CBody"><p>The queue for outgoing messages from this applicaiton to be placed in for publishing by <a href="../../index.html#File3:DatabaseApplication/CommandProducer.cs:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> this is shared by the <a href="../../index.html#File3:DatabaseApplication/CommandProducer.cs:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> the <a href="../../index.html#File3:DatabaseApplication/TwitchCommandConsumer.cs:DatabaseApplication.TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,4);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> and the <a href="../../index.html#File3:DatabaseApplication/TwitchMessageConsumer.cs:DatabaseApplication.TwitchMessageConsumer.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,356);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a></p></div>
 </div>
 
 <a name="DatabaseApplication.TwitchMessageConsumer.commandMessageQueue"></a><a name="Topic74"></a><div class="CTopic TVariable LCSharp">
@@ -52,53 +42,29 @@
  <div id="NDPrototype74" class="NDPrototype NoParameterForm">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt; commandMessageQueue</div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.mOutput"></a><a name="Topic75"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">mOutput</div>
- <div id="NDPrototype75" class="NDPrototype NoParameterForm"><a href="../../index.html#File3:DatabaseApplicationML.Model/ModelOutput.cs:DatabaseApplicationML.Model.ModelOutput" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,122);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >ModelOutput</a> mOutput</div>
+<a name="DatabaseApplication.TwitchMessageConsumer.ML_Objects"></a><a name="Topic97"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">ML Objects</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.mOutput"></a><a name="Topic98"></a>mOutput</td><td class="CDLDefinition"><p>the output of the machine learning algorthm</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.mInput"></a><a name="Topic99"></a>mInput</td><td class="CDLDefinition"><p>the input into the machine learning algorithm</p></td></tr></table></div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.mInput"></a><a name="Topic76"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">mInput</div>
- <div id="NDPrototype76" class="NDPrototype NoParameterForm"><a href="../../index.html#File3:DatabaseApplicationML.Model/ModelInput.cs:DatabaseApplicationML.Model.ModelInput" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,126);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >ModelInput</a> mInput</div>
+<a name="DatabaseApplication.TwitchMessageConsumer.ODBC_configuration"></a><a name="Topic348"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">ODBC configuration</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.path"></a><a name="Topic349"></a>path</td><td class="CDLDefinition"><p>the path to the folder containing sensitive information for this project on my computer</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.dbConnString"></a><a name="Topic350"></a>dbConnString</td><td class="CDLDefinition"><p>the text contained inside the Connection.txt file with information for connecting to the database</p></td></tr></table></div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.path"></a><a name="Topic77"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">path</div>
- <div id="NDPrototype77" class="NDPrototype NoParameterForm"><span class="SHKeyword">private static</span> <span class="SHKeyword">string</span> path</div>
-</div>
-
-<a name="DatabaseApplication.TwitchMessageConsumer.dbConnString"></a><a name="Topic78"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">dbConnString</div>
- <div id="NDPrototype78" class="NDPrototype NoParameterForm"><span class="SHKeyword">static private</span> <span class="SHKeyword">string</span> dbConnString</div>
-</div>
-
-<a name="DatabaseApplication.TwitchMessageConsumer.data"></a><a name="Topic79"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">data</div>
- <div id="NDPrototype79" class="NDPrototype NoParameterForm">DataSet data</div>
-</div>
-
-<a name="DatabaseApplication.TwitchMessageConsumer.dbAdapter"></a><a name="Topic80"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">dbAdapter</div>
- <div id="NDPrototype80" class="NDPrototype NoParameterForm">OdbcDataAdapter dbAdapter</div>
-</div>
-
-<a name="DatabaseApplication.TwitchMessageConsumer.dbCommand"></a><a name="Topic81"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">dbCommand</div>
- <div id="NDPrototype81" class="NDPrototype NoParameterForm">OdbcCommandBuilder dbCommand</div>
-</div>
-
-<a name="DatabaseApplication.TwitchMessageConsumer.connDB"></a><a name="Topic82"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">connDB</div>
- <div id="NDPrototype82" class="NDPrototype NoParameterForm">OdbcConnection connDB</div>
+<a name="DatabaseApplication.TwitchMessageConsumer.ODBS_objects"></a><a name="Topic351"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">ODBS objects</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.data"></a><a name="Topic352"></a>data</td><td class="CDLDefinition"><p>the data returned from a query</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.dbAdapter"></a><a name="Topic353"></a>dbAdapter</td><td class="CDLDefinition"><p>the object that handles retrival of data from the database</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.dbCommand"></a><a name="Topic354"></a>dbCommand</td><td class="CDLDefinition"><p>the command builder for <a href="../../index.html#File3:DatabaseApplication/TwitchMessageConsumer.cs:DatabaseApplication.TwitchMessageConsumer.dbAdapter" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,353);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >dbAdapter</a></p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.connDB"></a><a name="Topic355"></a>connDB</td><td class="CDLDefinition"><p>the connection to the database</p></td></tr></table></div>
 </div>
 
 <a name="DatabaseApplication.TwitchMessageConsumer.Functions"></a><a name="Topic83"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.TwitchMessageConsumer"></a><a name="Topic84"></a><div class="CTopic TFunction LCSharp">
+<a name="DatabaseApplication.TwitchMessageConsumer.TwitchMessageConsumer"></a><a name="Topic356"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">TwitchMessageConsumer</div>
- <div id="NDPrototype84" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> TwitchMessageConsumer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PModifierQualifier first"><span class="SHKeyword">ref</span>&nbsp;</td><td class="PType">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;&nbsp;</td><td class="PName last">commandMessageQueue</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype356" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> TwitchMessageConsumer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PModifierQualifier first"><span class="SHKeyword">ref</span>&nbsp;</td><td class="PType">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;&nbsp;</td><td class="PName last">commandMessageQueue</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div class="CBody"><p>The constructor for <a href="../../index.html#File3:DatabaseApplication/TwitchMessageConsumer.cs:DatabaseApplication.TwitchMessageConsumer.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,356);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a></p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">commandMessageQueue<div class="CDLParameterType"><span class="SHKeyword">ref</span> ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt;</div></td><td class="CDLDefinition"><p>The queue for outgoing messages from this applicaiton to be placed in for publishing by <a href="../../index.html#File3:DatabaseApplication/CommandProducer.cs:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a></p></td></tr></table></div>
 </div>
 
 <a name="DatabaseApplication.TwitchMessageConsumer.TMCThread"></a><a name="Topic85"></a><div class="CTopic TFunction LCSharp">
@@ -106,9 +72,43 @@
  <div id="NDPrototype85" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> TMCThread()</div>
 </div>
 
-<a name="DatabaseApplication.TwitchMessageConsumer.Kill"></a><a name="Topic86"></a><div class="CTopic TFunction LCSharp last">
+<a name="DatabaseApplication.TwitchMessageConsumer.Variables(2)"></a><a name="Topic357"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Variables</div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.Kafka_Consumer_client"></a><a name="Topic358"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Consumer client</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.consumer"></a><a name="Topic359"></a>consumer</td><td class="CDLDefinition"><p>the Kafka consumer client</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.topicp"></a><a name="Topic360"></a>topicp</td><td class="CDLDefinition"><p>the topic partition from <a href="../../index.html#File3:DatabaseApplication/TwitchMessageConsumer.cs:DatabaseApplication.TwitchMessageConsumer.consumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,359);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >consumer</a> to consume from</p></td></tr></table></div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.consumerresult"></a><a name="Topic361"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">consumerresult</div>
+ <div class="CBody"><p>The result of checking for the next new message on the Kafka server</p></div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.Kafka_Message"></a><a name="Topic362"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Message</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.input"></a><a name="Topic363"></a>input</td><td class="CDLDefinition"><p>the raw message from Kafka</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.channel"></a><a name="Topic364"></a>channel</td><td class="CDLDefinition"><p>the channel that the message was received from</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.uname"></a><a name="Topic365"></a>uname</td><td class="CDLDefinition"><p>the username of the user that sent the message</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.TwitchMessageConsumer.message"></a><a name="Topic366"></a>message</td><td class="CDLDefinition"><p>the actual message portion</p></td></tr></table></div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.result"></a><a name="Topic367"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">result</div>
+ <div class="CBody"><p>the result of the message being passed through the machine learning algorithm</p></div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.comm"></a><a name="Topic368"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">comm</div>
+ <div class="CBody"><p>the new query to be exicuted on the database</p></div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.Functions(2)"></a><a name="Topic369"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Functions</div>
+</div>
+
+<a name="DatabaseApplication.TwitchMessageConsumer.Kill"></a><a name="Topic370"></a><div class="CTopic TFunction LCSharp last">
  <div class="CTitle">Kill</div>
- <div id="NDPrototype86" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div id="NDPrototype370" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div class="CBody"><p>This ends the loop in &lt;TCCThread&gt; and cancels any current attempt to fetch a new message allowing the thread to end.</p></div>
 </div>
 
 </body></html>

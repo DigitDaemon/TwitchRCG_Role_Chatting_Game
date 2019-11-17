@@ -8,48 +8,24 @@
 
 <body onload="NDLoader.OnLoad('Content');" class="NDPage NDContentPage">
 
-<a name="Topic33"></a><div class="CTopic TClass LCSharp first">
+<a name="Topic14"></a><div class="CTopic TClass LCSharp first">
  <div class="CTitle"><span class="Qualifier">DatabaseApplication.</span>&#8203;ThreadController</div>
- <div class="NDClassPrototype" id="NDClassPrototype33"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;ThreadController</div></div></div>
+ <div class="NDClassPrototype" id="NDClassPrototype14"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;ThreadController</div></div></div>
+ <div class="CBody"><p>This class maintains the threads for the &lt;DatbaseAPplication&gt; and handles starting and shutting them down</p></div>
 </div>
 
 <a name="Variables"></a><a name="Topic34"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Variables</div>
 </div>
 
-<a name="MConsumer"></a><a name="Topic35"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">MConsumer</div>
- <div id="NDPrototype35" class="NDPrototype NoParameterForm"><a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,66);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a> MConsumer</div>
+<a name="Thread_objects"></a><a name="Topic16"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Thread objects</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="MConsumer"></a><a name="Topic17"></a>MConsumer</td><td class="CDLDefinition"><p>the object for <a href="../../../index.html#CSharpClass:DatabaseApplication.ThreadController:TMCon" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,24);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TMCon</a></p></td></tr><tr><td class="CDLEntry"><a name="CConsumer"></a><a name="Topic18"></a>CConsumer</td><td class="CDLDefinition"><p>the object for &lt;TCon&gt;</p></td></tr><tr><td class="CDLEntry"><a name="CommandCon"></a><a name="Topic19"></a>CommandCon</td><td class="CDLDefinition"><p>the object for <a href="../../../index.html#CSharpClass:DatabaseApplication.ThreadController:COMCon" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,42);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >COMCon</a></p></td></tr><tr><td class="CDLEntry"><a name="CommandPro"></a><a name="Topic21"></a>CommandPro</td><td class="CDLDefinition"><p>the object for <a href="../../../index.html#CSharpClass:DatabaseApplication.ThreadController:COMPro" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,27);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >COMPro</a></p></td></tr></table></div>
 </div>
 
-<a name="CConsumer"></a><a name="Topic36"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">CConsumer</div>
- <div id="NDPrototype36" class="NDPrototype NoParameterForm"><a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,14);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> CConsumer</div>
-</div>
-
-<a name="CommandCon"></a><a name="Topic37"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">CommandCon</div>
- <div id="NDPrototype37" class="NDPrototype NoParameterForm"><a href="../../../index.html#CSharpClass:DatabaseApplication.CommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,87);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandConsumer</a> CommandCon</div>
-</div>
-
-<a name="CommandPro"></a><a name="Topic38"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">CommandPro</div>
- <div id="NDPrototype38" class="NDPrototype NoParameterForm"><a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,4);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> CommandPro</div>
-</div>
-
-<a name="commandMessageQueue"></a><a name="Topic39"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">commandMessageQueue</div>
- <div id="NDPrototype39" class="NDPrototype NoParameterForm">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt; commandMessageQueue</div>
-</div>
-
-<a name="TMCon"></a><a name="Topic40"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">TMCon</div>
- <div id="NDPrototype40" class="NDPrototype NoParameterForm">Thread TMCon</div>
-</div>
-
-<a name="TCCon"></a><a name="Topic41"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">TCCon</div>
- <div id="NDPrototype41" class="NDPrototype NoParameterForm">Thread TCCon</div>
+<a name="Threads"></a><a name="Topic23"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Threads</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="TMCon"></a><a name="Topic24"></a>TMCon</td><td class="CDLDefinition"><p>reads from the twitch_message topic on Kafka, analysis user messages and updates the database</p></td></tr><tr><td class="CDLEntry"><a name="TCCon"></a><a name="Topic25"></a>TCCon</td><td class="CDLDefinition"><p>reads from the twitch_command topic on Kafka and adds new users to the database</p></td></tr><tr><td class="CDLEntry"><a name="COMcon"></a><a name="Topic26"></a>COMcon</td><td class="CDLDefinition"><p>reads from the COMMANDS topic on Kafka and exicutes relevent commands</p></td></tr><tr><td class="CDLEntry"><a name="COMPro"></a><a name="Topic27"></a>COMPro</td><td class="CDLDefinition"><p>produces to the COMMANDS topic on Kafka for IPC</p></td></tr></table></div>
 </div>
 
 <a name="COMCon"></a><a name="Topic42"></a><div class="CTopic TVariable LCSharp">
@@ -57,28 +33,32 @@
  <div id="NDPrototype42" class="NDPrototype NoParameterForm">Thread COMCon</div>
 </div>
 
-<a name="COMPro"></a><a name="Topic43"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">COMPro</div>
- <div id="NDPrototype43" class="NDPrototype NoParameterForm">Thread COMPro</div>
+<a name="commandMessageQueue"></a><a name="Topic28"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">commandMessageQueue</div>
+ <div id="NDPrototype28" class="NDPrototype NoParameterForm">ConcurrentQueue&lt;<span class="SHKeyword">string</span>&gt; commandMessageQueue</div>
+ <div class="CBody"><p>shared by the <a href="../../../index.html#CSharpClass:DatabaseApplication.CommandProducer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,1);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandProducer</a> the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchCommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,4);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchCommandConsumer</a> and the <a href="../../../index.html#CSharpClass:DatabaseApplication.TwitchMessageConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,66);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >TwitchMessageConsumer</a></p></div>
 </div>
 
 <a name="Functions"></a><a name="Topic44"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="ThreadController"></a><a name="Topic45"></a><div class="CTopic TFunction LCSharp">
+<a name="ThreadController"></a><a name="Topic30"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">ThreadController</div>
- <div id="NDPrototype45" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> ThreadController()</div>
+ <div id="NDPrototype30" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> ThreadController()</div>
+ <div class="CBody"><p>The constructor for <a href="../../../index.html#CSharpClass:DatabaseApplication.ThreadController:ThreadController" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,30);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >ThreadController</a> Initialises all objs and threads needed for the &lt;DatabaseApplication&gt; to run</p></div>
 </div>
 
-<a name="listThreads"></a><a name="Topic46"></a><div class="CTopic TFunction LCSharp">
+<a name="listThreads"></a><a name="Topic31"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">listThreads</div>
- <div id="NDPrototype46" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> listThreads()</div>
+ <div id="NDPrototype31" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> listThreads()</div>
+ <div class="CBody"><p>Provides feedback on the state of the threads in &lt;DatabaseApplication&gt;</p></div>
 </div>
 
-<a name="exit"></a><a name="Topic47"></a><div class="CTopic TFunction LCSharp last">
+<a name="exit"></a><a name="Topic32"></a><div class="CTopic TFunction LCSharp last">
  <div class="CTitle">exit</div>
- <div id="NDPrototype47" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> exit()</div>
+ <div id="NDPrototype32" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> exit()</div>
+ <div class="CBody"><p>Closes all of the threads and then ends the program</p></div>
 </div>
 
 </body></html>

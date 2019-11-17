@@ -8,33 +8,19 @@
 
 <body onload="NDLoader.OnLoad('Content');" class="NDPage NDContentPage">
 
-<a name="DatabaseApplication.CommandConsumer"></a><a name="Topic87"></a><div class="CTopic TClass LCSharp first">
+<a name="DatabaseApplication.CommandConsumer"></a><a name="Topic33"></a><div class="CTopic TClass LCSharp first">
  <div class="CTitle"><span class="Qualifier">DatabaseApplication.</span>&#8203;CommandConsumer</div>
- <div class="NDClassPrototype" id="NDClassPrototype87"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;CommandConsumer</div></div></div>
+ <div class="NDClassPrototype" id="NDClassPrototype33"><div class="CPEntry TClass Current"><div class="CPName"><span class="Qualifier">DatabaseApplication.</span>&#8203;CommandConsumer</div></div></div>
+ <div class="CBody"><p>This class will connect to Kafka and subscribe to the COMMANDS topic to allow for IPC</p></div>
 </div>
 
 <a name="DatabaseApplication.CommandConsumer.Variables"></a><a name="Topic88"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Variables</div>
 </div>
 
-<a name="DatabaseApplication.CommandConsumer.server"></a><a name="Topic89"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">server</div>
- <div id="NDPrototype89" class="NDPrototype NoParameterForm"><span class="SHKeyword">static</span> <span class="SHKeyword">string</span> server</div>
-</div>
-
-<a name="DatabaseApplication.CommandConsumer.Active"></a><a name="Topic90"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">Active</div>
- <div id="NDPrototype90" class="NDPrototype NoParameterForm"><span class="SHKeyword">private</span> <span class="SHKeyword">bool</span> Active</div>
-</div>
-
-<a name="DatabaseApplication.CommandConsumer.topic"></a><a name="Topic91"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">topic</div>
- <div id="NDPrototype91" class="NDPrototype NoParameterForm"><span class="SHKeyword">string</span> topic</div>
-</div>
-
-<a name="DatabaseApplication.CommandConsumer.config"></a><a name="Topic92"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">config</div>
- <div id="NDPrototype92" class="NDPrototype NoParameterForm">ConsumerConfig config</div>
+<a name="DatabaseApplication.CommandConsumer.Kafka_Consumer_Config"></a><a name="Topic35"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Consumer Config</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.server"></a><a name="Topic36"></a>server</td><td class="CDLDefinition"><p>the kafka server to connect to</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.topic"></a><a name="Topic37"></a>topic</td><td class="CDLDefinition"><p>the topic to subscribe to</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.config"></a><a name="Topic38"></a>config</td><td class="CDLDefinition"><p>an object containing configuration information for the Kafka connection</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.cancelToken"></a><a name="Topic39"></a>cancelToken</td><td class="CDLDefinition"><p>a token used to cancel a the Kafka consumer looing for new messages</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.source"></a><a name="Topic40"></a>source</td><td class="CDLDefinition"><p>the source of <a href="../../index.html#File3:DatabaseApplication/CommandConsumer.cs:DatabaseApplication.CommandConsumer.cancelToken" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,39);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >cancelToken</a></p></td></tr></table></div>
 </div>
 
 <a name="DatabaseApplication.CommandConsumer.canceltoken"></a><a name="Topic93"></a><div class="CTopic TVariable LCSharp">
@@ -42,33 +28,54 @@
  <div id="NDPrototype93" class="NDPrototype NoParameterForm">CancellationToken canceltoken</div>
 </div>
 
-<a name="DatabaseApplication.CommandConsumer.source"></a><a name="Topic94"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">source</div>
- <div id="NDPrototype94" class="NDPrototype NoParameterForm">CancellationTokenSource source</div>
-</div>
-
-<a name="DatabaseApplication.CommandConsumer.controller"></a><a name="Topic95"></a><div class="CTopic TVariable LCSharp">
- <div class="CTitle">controller</div>
- <div id="NDPrototype95" class="NDPrototype NoParameterForm"><a href="../../index.html#File3:DatabaseApplication/ThreadController.cs:DatabaseApplication.ThreadController" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,33);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >ThreadController</a> controller</div>
+<a name="DatabaseApplication.CommandConsumer.class_configuration"></a><a name="Topic41"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">class configuration</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.controller"></a><a name="Topic43"></a>controller</td><td class="CDLDefinition"><p>the object that instantiated this object</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.Active"></a><a name="Topic45"></a>Active</td><td class="CDLDefinition"><p>controls the main loop</p></td></tr></table></div>
 </div>
 
 <a name="DatabaseApplication.CommandConsumer.Functions"></a><a name="Topic96"></a><div class="CTopic TGroup LCSharp">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="DatabaseApplication.CommandConsumer.CommandConsumer"></a><a name="Topic97"></a><div class="CTopic TFunction LCSharp">
+<a name="DatabaseApplication.CommandConsumer.CommandConsumer"></a><a name="Topic46"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">CommandConsumer</div>
- <div id="NDPrototype97" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> CommandConsumer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PType first"><a href="../../index.html#File3:DatabaseApplication/ThreadController.cs:DatabaseApplication.ThreadController" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,33);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >ThreadController</a>&nbsp;</td><td class="PName last">controller</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype46" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters"><span class="SHKeyword">public</span> CommandConsumer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PType first"><a href="../../index.html#File3:DatabaseApplication/ThreadController.cs:DatabaseApplication.ThreadController" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,14);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >ThreadController</a>&nbsp;</td><td class="PName last">controller</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div class="CBody"><p>the contructor for the <a href="../../index.html#File3:DatabaseApplication/CommandConsumer.cs:DatabaseApplication.CommandConsumer.CommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,46);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandConsumer</a> class</p><p>parameters:</p><table class="CDefinitionList"><tr><td class="CDLEntry">controller</td><td class="CDLDefinition"><p>the object that created this one. Needed for exicuting IPC commands</p></td></tr></table></div>
 </div>
 
-<a name="DatabaseApplication.CommandConsumer.CommandThread"></a><a name="Topic98"></a><div class="CTopic TFunction LCSharp">
+<a name="DatabaseApplication.CommandConsumer.CommandThread"></a><a name="Topic47"></a><div class="CTopic TFunction LCSharp">
  <div class="CTitle">CommandThread</div>
- <div id="NDPrototype98" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> CommandThread()</div>
+ <div id="NDPrototype47" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> CommandThread()</div>
+ <div class="CBody"><p>the primary function of the <a href="../../index.html#File3:DatabaseApplication/CommandConsumer.cs:DatabaseApplication.CommandConsumer.CommandConsumer" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,46);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >CommandConsumer</a> to be run as a thread</p></div>
 </div>
 
-<a name="DatabaseApplication.CommandConsumer.Kill"></a><a name="Topic99"></a><div class="CTopic TFunction LCSharp last">
+<a name="DatabaseApplication.CommandConsumer.Variables(2)"></a><a name="Topic338"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Variables</div>
+</div>
+
+<a name="DatabaseApplication.CommandConsumer.Kafka_Consumer"></a><a name="Topic339"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka Consumer</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.consumer"></a><a name="Topic340"></a>consumer</td><td class="CDLDefinition"><p>the Kafka consumer object</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.topicp"></a><a name="Topic341"></a>topicp</td><td class="CDLDefinition"><p>the partition to subscribe to</p></td></tr></table></div>
+</div>
+
+<a name="DatabaseApplication.CommandConsumer.consumerresult"></a><a name="Topic342"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">consumerresult</div>
+ <div class="CBody"><p>the result of checking for a new message from the Kafka server</p></div>
+</div>
+
+<a name="DatabaseApplication.CommandConsumer.Kafka_message"></a><a name="Topic343"></a><div class="CTopic TVariable LCSharp">
+ <div class="CTitle">Kafka message</div>
+ <div class="CBody"><table class="CDefinitionList"><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.command"></a><a name="Topic344"></a>command</td><td class="CDLDefinition"><p>the part of the message that specifys an action to take</p></td></tr><tr><td class="CDLEntry"><a name="DatabaseApplication.CommandConsumer.parameter"></a><a name="Topic345"></a>parameter</td><td class="CDLDefinition"><p>the part of the messag that may be passed to a function as a parameter</p></td></tr></table></div>
+</div>
+
+<a name="DatabaseApplication.CommandConsumer.Functions(2)"></a><a name="Topic346"></a><div class="CTopic TGroup LCSharp">
+ <div class="CTitle">Functions</div>
+</div>
+
+<a name="DatabaseApplication.CommandConsumer.Kill"></a><a name="Topic347"></a><div class="CTopic TFunction LCSharp last">
  <div class="CTitle">Kill</div>
- <div id="NDPrototype99" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div id="NDPrototype347" class="NDPrototype NoParameterForm"><span class="SHKeyword">public</span> <span class="SHKeyword">void</span> Kill()</div>
+ <div class="CBody"><p>sets <a href="../../index.html#File3:DatabaseApplication/CommandConsumer.cs:DatabaseApplication.CommandConsumer.Active" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,45);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >Active</a> to false in order to end the primary loop and cancels any current attempt to fetch messages from Kafka</p></div>
 </div>
 
 </body></html>
