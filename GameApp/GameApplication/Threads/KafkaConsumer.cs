@@ -6,6 +6,9 @@ using System.Threading;
 
 namespace GameApplication
 {
+    /**
+     * This class reads in commands from the Kafka COMMANDS topic.
+     */
     class KafkaCommandConsumer
     {
         //vars: Kafka Consumer Config

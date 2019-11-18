@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 
 namespace GameCommandConsumer
-{ 
+{
     /**
      * This class reads in messages from the 'twitch_command' Kafka topic and seperates them into game commands and other commands
      */
@@ -36,13 +36,21 @@ namespace GameCommandConsumer
         //
         //GAME_START_FILTER - a list of commands that will start or join an instance of the game
         //OTHER_MESSAGE_FILTER - a list of the other relevent commands
-        private static List<string> GAME_START_FILTER = new List<string>(){ "!dQuest" };
+        private static List<string> GAME_START_FILTER = new List<string>() { "!dQuest" };
         private static List<string> OTHER_MESSAGE_FILTER = new List<string>() { "placeholder" };
 
         //bool: Active
-        //COntrols the main loop in <
+        //Controls the main loop in <GameCommandThread>
         private bool Active;
 
+        /**
+         * the constructor for <GameCommandConsumer>
+         * 
+         * Parameters:
+         * 
+         * gameMessageQueue - the refrence to a queue created by <ThreadController> for passing messages between threads
+         * otherMessageQueue - the refrence to a queue created by <ThreadController> for passing messages between threads
+         */
         public GameCommandConsumer(ref ConcurrentQueue<string> gameMessageQueue, ref ConcurrentQueue<string> otherMessageQueue)
         {
             this.gameMessageQueue = gameMessageQueue;
@@ -62,59 +70,62 @@ namespace GameCommandConsumer
             canceltoken = source.Token;
         }
 
+        /**
+         * the primary function of <GameCommandConsumer> to be run as a thread
+         */
         public void GameCommandThread()
         {
             Console.WriteLine("CommandConsumerThread start.");
             Active = true;
 
+
+            var consumer = new ConsumerBuilder<string, string>(config).Build();
+            var topicp = new TopicPartition(topic, 0);
+            consumer.Assign(topicp);
+
             while (Active)
             {
-                var consumer = new ConsumerBuilder<string, string>(config).Build();
-                var topicp = new TopicPartition(topic, 0);
-                consumer.Assign(topicp);
-                while (Active)
+                try
                 {
-                    try
+                    var consumeresult = consumer.Consume(canceltoken);
+
+                    if (!consumeresult.IsPartitionEOF)
                     {
-                        var consumeresult = consumer.Consume(canceltoken);
+                        var input = consumeresult.Value;
+                        string command;
+                        string username;
+                        string channel;
 
-                        if (!consumeresult.IsPartitionEOF)
+
+                        channel = input.Substring(0, input.IndexOf(" ")).Trim();
+                        command = input.Substring(input.IndexOf(" "), input.Length - channel.Length).Trim();
+                        username = command.Substring(0, command.IndexOf(" ")).Trim();
+                        command = command.Substring(command.IndexOf(" "), command.Length - username.Length).Trim();
+                        username.TrimStart(new char[] { '\0', ':' });
+
+                        Console.WriteLine("GameCommand----------> " + input);
+
+                        if (GAME_START_FILTER.Contains(command))
                         {
-                            var input = consumeresult.Value;
-                            string command;
-                            string username;
-                            string channel;
-                            
-
-                            channel = input.Substring(0, input.IndexOf(" ")).Trim();
-                            command = input.Substring(input.IndexOf(" "), input.Length - channel.Length).Trim();
-                            username = command.Substring(0, command.IndexOf(" ")).Trim();
-                            command = command.Substring(command.IndexOf(" "), command.Length - username.Length).Trim();
-                            username.TrimStart(new char[] { '\0', ':' });
-
-                            Console.WriteLine("GameCommand----------> " + input);
-
-                            if (GAME_START_FILTER.Contains(command))
-                            {
-                                gameMessageQueue.Enqueue(input);
-                            }
-                            else if (OTHER_MESSAGE_FILTER.Contains(command))
-                            {
-                                otherMessageQueue.Enqueue(input);
-                            }
+                            gameMessageQueue.Enqueue(input);
                         }
-                        else
+                        else if (OTHER_MESSAGE_FILTER.Contains(command))
                         {
-                            Thread.Sleep(100);
+                            otherMessageQueue.Enqueue(input);
                         }
                     }
-                    catch (System.OperationCanceledException e)
+                    else
                     {
-
+                        Thread.Sleep(100);
                     }
+                }
+                catch (System.OperationCanceledException e)
+                {
 
                 }
+
             }
+
         }
 
         public void Kill()
