@@ -7,19 +7,42 @@ using System.Threading;
 
 namespace GameCommandConsumer
 { 
-
+    /**
+     * This class reads in messages from the 'twitch_command' Kafka topic and seperates them into game commands and other commands
+     */
     class GameCommandConsumer
     {
+        //vars: Kafka Consumer Config
+        //
+        //server - the kafka server to connect to
+        //topic - the topic to subscribe to
+        //config - an object containing configuration information for the Kafka connection
+        //cancelToken - a token used to cancel a the Kafka consumer looing for new messages
+        //source - the source of <cancelToken>
         static string server = "Localhost:9092";
-        private bool Active;
         string topic = "twitch_command";
         ConsumerConfig config;
         CancellationToken canceltoken;
         CancellationTokenSource source;
+
+        //objs: Queues
+        //
+        //gameMesssageQueue - the queue for commands relating to starting or playing the twitch game
+        //otherMessageQueue - the queue for other commands still relevent to the application
         ConcurrentQueue<string> gameMessageQueue;
         ConcurrentQueue<string> otherMessageQueue;
+
+        //objs:
+        //
+        //GAME_START_FILTER - a list of commands that will start or join an instance of the game
+        //OTHER_MESSAGE_FILTER - a list of the other relevent commands
         private static List<string> GAME_START_FILTER = new List<string>(){ "!dQuest" };
         private static List<string> OTHER_MESSAGE_FILTER = new List<string>() { "placeholder" };
+
+        //bool: Active
+        //COntrols the main loop in <
+        private bool Active;
+
         public GameCommandConsumer(ref ConcurrentQueue<string> gameMessageQueue, ref ConcurrentQueue<string> otherMessageQueue)
         {
             this.gameMessageQueue = gameMessageQueue;
@@ -39,7 +62,7 @@ namespace GameCommandConsumer
             canceltoken = source.Token;
         }
 
-        public void CommandConsumerThread()
+        public void GameCommandThread()
         {
             Console.WriteLine("CommandConsumerThread start.");
             Active = true;
