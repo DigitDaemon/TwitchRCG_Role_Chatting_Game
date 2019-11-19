@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace GameCommandConsumer
+namespace GameApplication
 {
     /**
      * This class reads in messages from the 'twitch_command' Kafka topic and seperates them into game commands and other commands
@@ -91,6 +91,12 @@ namespace GameCommandConsumer
 
                     if (!consumeresult.IsPartitionEOF)
                     {
+                        //strings: Message
+                        //
+                        //input - the raw message
+                        //command - the portion of the message containing a command
+                        //username - the user name of the person who sent the command
+                        //channel - the channel that the command was sent from
                         var input = consumeresult.Value;
                         string command;
                         string username;
@@ -107,7 +113,7 @@ namespace GameCommandConsumer
 
                         if (GAME_START_FILTER.Contains(command))
                         {
-                            gameMessageQueue.Enqueue(input);
+                            gameMessageQueue.Enqueue(channel + " " + username);
                         }
                         else if (OTHER_MESSAGE_FILTER.Contains(command))
                         {
@@ -128,6 +134,10 @@ namespace GameCommandConsumer
 
         }
 
+        /**
+         * sets <Active> to false in order to end the primary loop and cancels any current attempt to
+         * fetch messages from Kafka
+         */
         public void Kill()
         {
             Active = false;
