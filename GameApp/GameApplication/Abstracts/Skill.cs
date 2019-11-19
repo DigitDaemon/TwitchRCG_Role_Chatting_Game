@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameApplication.Agent_Dependencies
+namespace GameApplication.Abstracts
 {
-    public class Skill
+    abstract class Skill
     {
     }
 }

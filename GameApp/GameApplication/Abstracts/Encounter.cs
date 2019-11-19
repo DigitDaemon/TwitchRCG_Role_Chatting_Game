@@ -6,5 +6,8 @@ namespace GameApplication
 {
     public abstract class Encounter
     {
+        List<Player> playersList;
+        List<Player> deadPlayers;
+
     }
 }
