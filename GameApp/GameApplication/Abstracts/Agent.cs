@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameApplication
+namespace GameApplication.Abstracts
 {
     public abstract class Agent
     {
@@ -18,11 +18,14 @@ namespace GameApplication
         protected int baseMastery { get; }
         protected int baseArmorValue { get; }
         protected int baseWarding { get; }
+        protected int speed { get; }
         private List<Modifier> modsList { get; set; }
-        private List<Skill> skills { get; }
+        protected List<Skill> skills { get; }
 
-        public Agent(int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills)
+
+        public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed)
         {
+            this.name = name;
             this.baseHealth = baseHealth;
             currentHealth = baseHealth;
             this.baseStrength = strength;
@@ -30,6 +33,12 @@ namespace GameApplication
             this.baseMind = mind;
             this.baseConcentration = concentration;
             this.skills = skills;
+            this.speed = speed;
+        }
+
+        public string getName()
+        {
+            return name;
         }
 
         public void TakeDamage(int amount, string type, List<Modifier> effects)
@@ -111,7 +120,11 @@ namespace GameApplication
                         currentHealth += mod.value;
                     }
                 }
-
+                mod.duration--;
+                if (mod.duration >= 0)
+                {
+                    modsList.RemoveAt(modsList.IndexOf(mod));
+                }
             }
 
             checkDeath();
@@ -170,20 +183,20 @@ namespace GameApplication
             return currentHealth;
         }
 
-        public List<string> getStatus()
+        public List<KeyValuePair<string, string>> getStatus()
         {
-            var statusList = new List<string>();
+            var statusList = new List<KeyValuePair<string,string>>();
             if (currentHealth > (float)(baseHealth * 66))
             {
-                statusList.Add("Healthy");
+                statusList.Add(new KeyValuePair<string,string>(name,"Healthy"));
             }
             else if (currentHealth < (float)(baseHealth * 33))
             {
-                statusList.Add("Critical");
+                statusList.Add(new KeyValuePair<string, string>(name, "Critical"));
             }
             else
             {
-                statusList.Add("Hurt");
+                statusList.Add(new KeyValuePair<string, string>(name, "Hurt"));
             }
 
             var debuffs = 0;
@@ -198,24 +211,31 @@ namespace GameApplication
 
             if(debuffs > 2)
             {
-                statusList.Add("Heavily debuffed");
+                statusList.Add(new KeyValuePair<string, string>(name, "Heavily Debuffed"));
             }else if (debuffs > 0)
             {
-                statusList.Add("Debuffed");
+                statusList.Add(new KeyValuePair<string, string>(name, "Debuffed"));
             }
 
             if (dots > 2)
             {
-                statusList.Add("Heavily Dotted");
+                statusList.Add(new KeyValuePair<string, string>(name, "Heavily Dotted"));
             }
             else if (dots > 0)
             {
-                statusList.Add("Dotted");
+                statusList.Add(new KeyValuePair<string, string>(name, "Dotted"));
             }
 
 
             return statusList;
 
+        }
+
+        public abstract KeyValuePair<string, string> getAction(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus);
+        
+        public void modify(Modifier mod)
+        {
+            modsList.Add(mod);
         }
     }
 }

@@ -4,7 +4,16 @@ using System.Text;
 
 namespace GameApplication.Abstracts
 {
-    abstract class Skill
+    public abstract class Skill
     {
+        internal object getCondition()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object getTarget()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

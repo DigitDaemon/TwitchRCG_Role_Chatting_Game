@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GameApplication.Abstracts
 {
-    interface Class
+    public interface Class
     {
         Skill getBaseSkill();
 

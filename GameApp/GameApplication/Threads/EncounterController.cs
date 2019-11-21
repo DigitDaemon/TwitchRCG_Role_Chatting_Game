@@ -14,7 +14,9 @@ namespace GameApplication
         System.Timers.Timer joinPeriod;
         ConcurrentQueue<KeyValuePair<string, string>> twitchOutQueue;
         ConcurrentQueue<KeyValuePair<string, string>> discordOutQueue;
+        Queue<Agents.Player> Players;
         bool open;
+        bool gameOver;
 
         public EncounterController(string channel, ref ConcurrentQueue<KeyValuePair<string, string>> twitchOutQueue, ref ConcurrentQueue<KeyValuePair<string, string>> discordOutQueue)
         {
@@ -22,6 +24,7 @@ namespace GameApplication
             this.twitchOutQueue = twitchOutQueue;
             this.discordOutQueue = discordOutQueue;
             open = true;
+            gameOver = false;
 
             joinPeriod = new System.Timers.Timer(120000);
             joinPeriod.Elapsed += closeJoin;
@@ -41,6 +44,18 @@ namespace GameApplication
             {
                 Thread.Sleep(500);
             }
+            while (!gameOver)
+            {
+                try
+                {
+                    encounter.nextTurn();
+                }
+                catch(Exceptions.GameOverException go)
+                {
+                    gameOver = true;
+                }
+            }
+            encounter.endOfEncounter();
         }
 
         public void enqueTwitch(string message)
@@ -57,7 +72,15 @@ namespace GameApplication
         {
             if (open)
             {
-                //add player to encounter
+                try
+                {
+                    encounter.AddPlayer(SimpleCharacterBuilder.buildCharacter(uname));
+                }
+                catch(Exceptions.NoSuchPlayerException nsp)
+                {
+                    twitchOutQueue.Enqueue(new KeyValuePair<string, string>(channel, "@" + uname + " You are not currently registered in TwitchRCG. "
+                        + "You can register by typing '!dJoin' into chat."));
+                }
             }
         }
     }
