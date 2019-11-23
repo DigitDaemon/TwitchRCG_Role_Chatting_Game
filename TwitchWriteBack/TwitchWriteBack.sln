@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameApplication", "GameApplication\GameApplication.csproj", "{BB6F3E22-F7FB-4663-A929-B8CEC21569F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchWriteBack", "TwitchWriteBack\TwitchWriteBack.csproj", "{383286E5-F916-4162-A6EE-F723A15D983C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB6F3E22-F7FB-4663-A929-B8CEC21569F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB6F3E22-F7FB-4663-A929-B8CEC21569F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB6F3E22-F7FB-4663-A929-B8CEC21569F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB6F3E22-F7FB-4663-A929-B8CEC21569F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383286E5-F916-4162-A6EE-F723A15D983C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383286E5-F916-4162-A6EE-F723A15D983C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383286E5-F916-4162-A6EE-F723A15D983C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383286E5-F916-4162-A6EE-F723A15D983C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4BF1D412-48D3-4F03-99B2-EAAC8DE6FD47}
+		SolutionGuid = {9F746605-C579-462F-B946-4BAF44DB9FA3}
 	EndGlobalSection
 EndGlobal

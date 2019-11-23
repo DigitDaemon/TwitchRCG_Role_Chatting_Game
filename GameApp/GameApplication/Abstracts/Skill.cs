@@ -15,5 +15,10 @@ namespace GameApplication.Abstracts
         {
             throw new NotImplementedException();
         }
+
+        internal string getSkill()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

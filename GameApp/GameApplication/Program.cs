@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace GameApplication
 {
@@ -20,6 +21,8 @@ namespace GameApplication
             //obj: controller
             //The object that maintains and controlls the <GameApplication> threads
             ThreadController controller = new ThreadController();
+            Thread conThread = new Thread(controller.ControlLoop);
+            conThread.Start();
 
             while (active)
             {

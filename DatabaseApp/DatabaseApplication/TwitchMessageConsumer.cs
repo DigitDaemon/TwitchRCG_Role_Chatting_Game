@@ -222,6 +222,7 @@ namespace DatabaseApplication
          */
         public void Kill()
         {
+            connDB.Close();
             Active = false;
             source.Cancel();
         }

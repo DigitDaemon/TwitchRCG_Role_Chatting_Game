@@ -73,6 +73,7 @@ namespace GameApplication
 
         public void ControlLoop()
         {
+            Console.WriteLine("ControlLoop start");
             while (active)
             {
                 if (!gameMessageQueue.IsEmpty)
@@ -88,39 +89,32 @@ namespace GameApplication
 
         public void AddJoinGame(string message)
         {
+            Console.WriteLine("AddJoinGame" + message);
             var channel = message.Substring(0, message.IndexOf(" "));
             var uname = message.Substring(message.IndexOf(" "), message.Length - channel.Length).Trim();
-            try
+            if (encounters.Exists(x => x.Key == channel))
             {
                 encounters.Find(x => x.Key == channel).Value.AddPlayer(uname);
             }
-            catch(ArgumentNullException e)
-            {
-                try
-                {
-                    var cooldown = cooldownList.Find(x => x.Key == channel);
-                }
-                catch(ArgumentNullException j)
-                {
+            else if(!cooldownList.Exists(x => x.Key == channel)) { 
                     startEncounter(message);
-                }
-                
             }
+            
 
             
         }
 
         public void startEncounter(string message)
         {
+            
             var channel = message.Substring(0, message.IndexOf(" "));
             var uname = message.Substring(message.IndexOf(" "), message.Length - channel.Length).Trim();
-
+            Console.WriteLine("Encounter started for " + channel);
             addCooldown(channel);
 
-            KeyValuePair<string, EncounterController> newEncounter = new KeyValuePair<string, EncounterController>(channel, new EncounterController());
-            /*
-             * Add encounter thread stuff here 
-             */
+            KeyValuePair<string, EncounterController> newEncounter = new KeyValuePair<string, EncounterController>(channel, new EncounterController(channel, ref twitchOutQueue, ref discordOutQueue));
+            Thread encounterThread = new Thread(newEncounter.Value.encounterThread);
+            encounterThread.Start();
             newEncounter.Value.AddPlayer(uname);
             encounters.Add(newEncounter);
             
@@ -137,10 +131,22 @@ namespace GameApplication
 
         public void cooldownEnded(Object source, ElapsedEventArgs e)
         {
-            System.Timers.Timer timer = source as System.Timers.Timer;
-            timer.Elapsed -= cooldownEnded;
-            cooldownList.RemoveAt(cooldownList.FindIndex(x => x.Value == timer));
-            timer.Dispose();
+            for(int i = 0; i < cooldownList.Count; i++)
+            {
+                if (!cooldownList[i].Value.Enabled)
+                {
+                    cooldownList[i].Value.Elapsed -= cooldownEnded;
+                    cooldownList[i].Value.Dispose();
+                    if (encounters.Exists(x => x.Key.Equals(cooldownList[i].Key)) && encounters.Exists(x => x.Value.gameOver))
+                    {
+                        encounters.Remove(encounters.Find(x => x.Key.Equals(cooldownList[i].Key)));
+                    }
+                    twitchOutQueue.Enqueue(new KeyValuePair<string, string>(cooldownList[i].Key, "There is a new Quest posted! Start your adventure by typing in '!dQuest' into chat."));
+                    cooldownList.Remove(cooldownList.Find(x => x.Key.Equals(cooldownList[i].Key)));
+                   
+                    break;
+                }
+            }
         }
 
         /**
@@ -156,7 +162,11 @@ namespace GameApplication
          */
         public void exit()
         {
-           
+            active = false;
+            commandConsumer.Kill();
+            kafkaProducer.Kill();
+            gameConsumer.Kill();
+            System.Environment.Exit(0);
         }
     }
 }

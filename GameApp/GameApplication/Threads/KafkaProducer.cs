@@ -71,7 +71,7 @@ namespace GameApplication
                     KeyValuePair<string, string> message;
                     twitchOutQueue.TryDequeue(out message);
                     producer.ProduceAsync("twitch_out", new Message<string, string> { Key = message.Key, Value = message.Value }).Wait();
-
+                    producer.ProduceAsync("discord_out", new Message<string, string> { Key = message.Key, Value = message.Value }).Wait();
                 }
                 else if(!discordOutQueue.IsEmpty)
                 {

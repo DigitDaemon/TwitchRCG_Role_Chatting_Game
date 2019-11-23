@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 
-namespace StreamClientProducer
+namespace TwitchWriteBack
 {
     /**
      * This class is responcible for getting the messages from Twitch through an irc client.
@@ -25,23 +25,20 @@ namespace StreamClientProducer
         //trimChar - an array of characters used when parsing the irc messages
         //lengthMin - the minumum size of a message to be passed into the system.
         const int ALLOWABLE_FAILURES = 10;
-        const int RESET_CYCLES = 1000;
-        private const string username = "DigitDaemon";
+        const int RESET_CYCLES = 100;
+        private const string username = "digitdbot";
         private static string path = Path.Combine(Environment.CurrentDirectory.Replace(@"bin\Debug\netcoreapp2.1", ""), @"Data\");
         private static string password = File.ReadAllText(Path.Combine(path, "Token.txt"));//do not push this!!!
-        private static char[] trimChar = new char[69] { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
-            'q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L',
-            'M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ','.','@','#','!', '_', '-', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-        const int lengthMin = 8;
+        
 
         //objs: cross class shared resources
         //
         //messageQueue - Messages will be enqueued to this queue in order to make them availible to <KafkaProducer>
         //trigger - this timer is the trigger for the event to check for new messages
         //blacklist - a collection of users who ar enot participating and messages should be excluded 
-        ConcurrentQueue<String> messageQueue;
+        ConcurrentQueue<string> messageQueue;
         System.Timers.Timer trigger;
-        HashSet<string> blacklist;
+        
 
         //vars: client resources
         //
@@ -52,10 +49,9 @@ namespace StreamClientProducer
         //channel - the name of the twitch channel being connected to
         TcpClient client;
         StreamWriter writer;
-        StreamReader reader;
         int cycles;
         string channel;
-        
+        string messageTemplate; 
         //Function: TwitchClient
         //
         //The constructor for this class.
@@ -65,21 +61,15 @@ namespace StreamClientProducer
         //trigger - a refrence to the timer shared by all <TwitchClient> objects, triggers the event handler
         //queue - a refrence to the queue shared by all the <TwitchClient> objects and the <KafkaProducer>
         //blacklist - the users who ar enot participating and should be ignored
-        public TwitchClient(String channel, ref System.Timers.Timer trigger, ref ConcurrentQueue<string> queue, ref HashSet<string> blacklist)
+        public TwitchClient(String channel, ref System.Timers.Timer trigger, ref ConcurrentQueue<string> queue)
         {
             Console.WriteLine(channel + " Thread Start");
             cycles = 0;
             this.messageQueue = queue;
             this.channel = channel;
             this.trigger = trigger;
-            this.blacklist = blacklist;
-        }
-
-        /**
-         * Does the primary connect to the twitch irc channel and then subscribes its event handler to <trigger>
-         */
-        public void CThread()
-        {
+            
+            messageTemplate = $":{channel}!{channel}@{channel}.tmi.twitch.tv PRIVMSG #{channel} : ";
             Console.WriteLine("Channel Thread " + channel + " start");
             Connect();
             trigger.Elapsed += onTick;
@@ -115,14 +105,7 @@ namespace StreamClientProducer
             {
                 Console.WriteLine(e.Message);
             }
-            try
-            {
-                reader.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            
         }
 
         /**
@@ -160,30 +143,12 @@ namespace StreamClientProducer
 
             try
             {
-                if (client.Available > 0 || reader.Peek() >= 0)
+                if (client.Available > 0 || !messageQueue.IsEmpty)
                 {
-
-                    var message = reader.ReadLine();
-                    var uname = "";
-
-                    message = message.Remove(0, 1);
-                    if (message.Contains("@") && !message.Contains("JOIN"))
-                    {
-                        while (!message[0].Equals('!'))
-                        {
-                            uname += message[0];
-                            message = message.Remove(0, 1);
-                        }
-
-                        message = message.TrimStart(trimChar);
-                        message = message.Remove(0, 1);
-                        if(((!blacklist.Contains(uname) && message.Length >= lengthMin) || message.Contains("!d")) && !message.Contains("http"))
-                            messageQueue.Enqueue(channel + " " + uname + " " + message);
-                        
-                    }
-                    
-
-
+                    string msg;
+                    messageQueue.TryDequeue(out msg);
+                    var message = messageTemplate + msg;
+                    writer.WriteLine(message);
                 }
                 else
                 {
@@ -216,7 +181,6 @@ namespace StreamClientProducer
                     attempts++;
                     client = new TcpClient("irc.chat.twitch.tv.", 6667);
                     writer = new StreamWriter(client.GetStream());
-                    reader = new StreamReader(client.GetStream());
                     writer.WriteLine("PASS " + password + Environment.NewLine
                         + "NICK " + username + Environment.NewLine
                         + "USER " + username + " 8 * :" + username);

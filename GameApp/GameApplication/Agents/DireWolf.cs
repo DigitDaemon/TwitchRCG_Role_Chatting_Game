@@ -5,13 +5,14 @@ using System.Text;
 
 namespace GameApplication.Agents
 {
-    public class DireWolf : Abstracts.Agent
+    public class DireWolf : Abstracts.Monster
     {
         const int baseSpeed = 12;
-        const int CR = 3;
         
+        static List<string> actionPriority = new List<string>(){ "PhysAttack" };
+
         public DireWolf(int UnId, int speed)
-            : base("DireWolf"+UnId,120,30,0,0,1,new List<Abstracts.Skill>(),speed)
+            : base("DireWolf"+UnId,120,30,0,0,1,new List<Abstracts.Skill>(),baseSpeed + speed, 3, 35)
         {
         }
 
@@ -19,29 +20,22 @@ namespace GameApplication.Agents
         {
             return baseSpeed;
         }
-        static int getCR()
+
+        public override void defaultAction()
         {
-            return CR;
+            
         }
 
         public override KeyValuePair<string, string> getAction(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus)
         {
-            foreach (KeyValuePair<string, string> status in enemyStatus)
-            {
-                if (status.Value.Equals("Critical"))
-                    return new KeyValuePair<string, string>(status.Key, "PhysAttack");
-            }
-            foreach (KeyValuePair<string, string> status in enemyStatus)
-            {
-                if (status.Value.Equals("Hurt"))
-                    return new KeyValuePair<string, string>(status.Key, "PhysAttack");
-            }
-            foreach (KeyValuePair<string, string> status in enemyStatus)
-            {
-                if (status.Value.Equals("Healthy"))
-                    return new KeyValuePair<string, string>(status.Key, "PhysAttack");
-            }
-            return new KeyValuePair<string, string>(name, "Wait");
+            return this.getAction(enemyStatus, allyStatus, actionPriority);
         }
+
+        public override string getDefaultAction()
+        {
+            return "Wait";
+        }
+
+        
     }
 }

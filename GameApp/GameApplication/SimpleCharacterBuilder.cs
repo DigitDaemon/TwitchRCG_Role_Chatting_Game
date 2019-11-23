@@ -30,31 +30,49 @@ namespace GameApplication
 
         static public Agents.Player buildCharacter(string uname)
         {
+            uname = uname.TrimStart(new char[] { '\0', ':' });
             try
             {
-                connDB.Open();
+                if(connDB.State.HasFlag(ConnectionState.Open))
+                    connDB.Open();
             }
             catch (OdbcException e)
             {
                 Console.WriteLine(e.Message + "\n\n" + e.StackTrace);
             }
 
+            data = new DataSet();
             dbAdapter.SelectCommand = new OdbcCommand("SELECT * FROM users WHERE twitch_name='" + uname + "';", connDB);
             dbAdapter.Fill(data);
 
             if (data.Tables[0].Rows.Count == 0)
                 throw new GameApplication.Exceptions.NoSuchPlayerException("There is no " + uname + " in the database.");
 
+            var levelBoost = .04 * float.Parse(data.Tables[0].Rows[0]["level"].ToString());
+            levelBoost += 1;
+
             Abstracts.Class spec = new Classes.Fighter();
             Abstracts.Race race = new Races.Human();
 
-            int baseHealth = race.getBaseHealth() + (int)((1f / 3f) * float.Parse(data.Tables[0].Rows[0]["temper"].ToString())) + (int)((1f / 4f) * float.Parse(data.Tables[0].Rows[0]["cheer"].ToString()));
-            int strength = race.getBaseStrength() + (int)((1f / 4f) * float.Parse(data.Tables[0].Rows[0]["temper"].ToString()));
-            int mind = race.getBaseMind() + (int)((1f / 3f) * float.Parse(data.Tables[0].Rows[0]["curiosity"].ToString()));
-            int mastery = (int)(1f / 2f) * int.Parse(data.Tables[0].Rows[0]["empathy"].ToString());
-            int concentration = (int)(1f / 2f) * int.Parse(data.Tables[0].Rows[0]["charisma"].ToString());
+            int temper = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["temper"].ToString()));
+            int cheer = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["cheer"].ToString()));
+            int curiosity = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["curiosity"].ToString()));
+            int charisma = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["charisma"].ToString()));
+            int empathy = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["empathy"].ToString()));
+
+            int baseHealth = race.getBaseHealth() + (int)((1f / 3f) * temper + (int)((1f / 4f) * cheer));
+            Console.WriteLine("baseHealth" + baseHealth);
+            int strength = race.getBaseStrength() + (int)((1f / 4f) * temper);
+            Console.WriteLine("strength" + strength);
+            int mind = race.getBaseMind() + (int)((1f / 3f) * curiosity);
+            Console.WriteLine("mind" + mind);
+            int mastery = (int)((1f / 2f) * empathy);
+            Console.WriteLine("mastery" + mastery);
+            int concentration = (int)((1f / 2f) * charisma);
+            Console.WriteLine("concentration" + concentration);
             var skills = new List<Abstracts.Skill>();
-            int speed = race.getBaseSpeed() + (int)(1f / 2f) * int.Parse(data.Tables[0].Rows[0]["cheer"].ToString());
+            int speed = race.getBaseSpeed() + (int)((1f / 2f) * cheer);
+            Console.WriteLine("speed" + speed);
             Agents.Player player = new Agents.Player(baseHealth, strength, mind, concentration, mastery, skills, speed, spec, race, uname);
             connDB.Close();
 

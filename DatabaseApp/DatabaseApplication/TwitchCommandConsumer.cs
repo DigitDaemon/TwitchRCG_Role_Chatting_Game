@@ -147,39 +147,54 @@ namespace DatabaseApplication
 
                         if (message.ToLower().Equals("!djoin"))
                         {
-                            dbAdapter.SelectCommand = new OdbcCommand("SELECT * FROM users WHERE twitch_name='" + uname + "';", connDB);
-                            dbAdapter.Fill(data);
-
-                            if(data.Tables[0].Rows.Count == 0 || data.Tables[0].Rows[0]["discord_name"].ToString().Equals(""))
+                            bool joined = false;
+                            do
                             {
-                                if (data.Tables[0].Rows.Count == 0)
+                                dbAdapter.SelectCommand = new OdbcCommand("SELECT * FROM users WHERE twitch_name='" + uname + "';", connDB);
+                                dbAdapter.Fill(data);
+
+                                if (data.Tables[0].Rows.Count == 0 || data.Tables[0].Rows[0]["discord_name"].ToString().Equals(""))
+                                {
+                                    if (data.Tables[0].Rows.Count == 0)
+                                    {
+                                        commandMessageQueue.Enqueue("SCPUnblacklist " + uname);
+
+                                        if (parameter.Equals(""))
+                                        {
+                                            OdbcCommand comm = new OdbcCommand("INSERT INTO users (twitch_name) VALUES ('" + uname + "' )", connDB);
+                                            comm.ExecuteNonQueryAsync().Wait();
+                                        }
+                                        else
+                                        {
+                                            OdbcCommand comm = new OdbcCommand("INSERT INTO users (twitch_name, discord_name) VALUES ( '" + uname + "','" + parameter + "')", connDB);
+                                            comm.ExecuteNonQueryAsync().Wait();
+                                        }
+                                    }
+                                    else if (!parameter.Equals(""))
+                                    {
+                                        data.Tables[0].Rows[0]["discord_name"] = parameter;
+                                        dbAdapter.Update(data);
+                                    }
+                                }
+                                try
                                 {
                                     commandMessageQueue.Enqueue("SCPUnblacklist " + uname);
-                                    
-                                    if (parameter.Equals(""))
-                                    {
-                                        OdbcCommand comm = new OdbcCommand("INSERT INTO users (twitch_name) VALUES ('"+uname+"' )", connDB);
-                                        comm.ExecuteNonQueryAsync().Wait();
-                                    } else
-                                    {
-                                        OdbcCommand comm = new OdbcCommand("INSERT INTO users (twitch_name, discord_name) VALUES ( '"+uname+ "','"+parameter+"')", connDB);
-                                        comm.ExecuteNonQueryAsync().Wait();
-                                    }
-                                } else if (!parameter.Equals(""))
-                                {
-                                    data.Tables[0].Rows[0]["discord_name"] = parameter;
-                                    dbAdapter.Update(data);
                                 }
-                            }
-                            try
-                            {
-                                commandMessageQueue.Enqueue("SCPUnblacklist " + uname);
-                            }
-                            catch(Exception e)
-                            {
-                                Console.WriteLine(e.Message);
-                                Console.WriteLine(e.StackTrace);
-                            }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                    Console.WriteLine(e.StackTrace);
+                                }
+
+                                data.Reset();
+                                dbAdapter.Fill(data);
+                                if (data.Tables[0].Rows.Count > 0)
+                                {
+                                    joined = true;
+                                    data.Reset();
+                                }
+
+                            } while (joined == false);
                         }
                     }
                     else
@@ -200,6 +215,7 @@ namespace DatabaseApplication
          */
         public void Kill()
         {
+            connDB.Close();
             Active = false;
             source.Cancel();
         }

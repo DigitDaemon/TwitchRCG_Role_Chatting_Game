@@ -36,7 +36,7 @@ namespace GameApplication
         //
         //GAME_START_FILTER - a list of commands that will start or join an instance of the game
         //OTHER_MESSAGE_FILTER - a list of the other relevent commands
-        private static List<string> GAME_START_FILTER = new List<string>() { "!dQuest" };
+        private static List<string> GAME_START_FILTER = new List<string>() { "!dquest" };
         private static List<string> OTHER_MESSAGE_FILTER = new List<string>() { "placeholder" };
 
         //bool: Active
@@ -111,11 +111,12 @@ namespace GameApplication
 
                         Console.WriteLine("GameCommand----------> " + input);
 
-                        if (GAME_START_FILTER.Contains(command))
+                        if (GAME_START_FILTER.Contains(command.ToLower()))
                         {
                             gameMessageQueue.Enqueue(channel + " " + username);
+                            Console.WriteLine(username + "tried to join");
                         }
-                        else if (OTHER_MESSAGE_FILTER.Contains(command))
+                        else if (OTHER_MESSAGE_FILTER.Contains(command.ToLower()))
                         {
                             otherMessageQueue.Enqueue(input);
                         }

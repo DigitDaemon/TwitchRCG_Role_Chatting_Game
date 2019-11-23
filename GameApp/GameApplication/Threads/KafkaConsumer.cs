@@ -103,7 +103,7 @@ namespace GameApplication
                         Console.WriteLine("COMMAND----------> " + input);
 
 
-                        if (command.Equals("DAExit") || command.Equals("System-Shutdown"))
+                        if (command.Equals("GAExit") || command.Equals("System-Shutdown"))
                         {
                             Active = false;
                             source.Cancel();

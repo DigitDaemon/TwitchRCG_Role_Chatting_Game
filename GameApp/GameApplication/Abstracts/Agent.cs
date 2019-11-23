@@ -21,6 +21,7 @@ namespace GameApplication.Abstracts
         protected int speed { get; }
         private List<Modifier> modsList { get; set; }
         protected List<Skill> skills { get; }
+        protected Item item;
 
 
         public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed)
@@ -34,6 +35,22 @@ namespace GameApplication.Abstracts
             this.baseConcentration = concentration;
             this.skills = skills;
             this.speed = speed;
+            modsList = new List<Modifier>();
+        }
+
+        public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed, Item item)
+        {
+            this.name = name;
+            this.baseHealth = baseHealth;
+            currentHealth = baseHealth;
+            this.baseStrength = strength;
+            this.baseMastery = mastery;
+            this.baseMind = mind;
+            this.baseConcentration = concentration;
+            this.skills = skills;
+            this.speed = speed;
+            this.item = item;
+            modsList = new List<Modifier>();
         }
 
         public string getName()
@@ -66,9 +83,12 @@ namespace GameApplication.Abstracts
                 currentHealth -= amount * (int)((100 - currentWarding) / 100f);
             }
 
-            foreach(Modifier mod in effects)
+            if (effects != null)
             {
-                modsList.Add(mod);
+                foreach (Modifier mod in effects)
+                {
+                    modsList.Add(mod);
+                }
             }
 
             checkDeath();
@@ -88,7 +108,7 @@ namespace GameApplication.Abstracts
                     
                 }
                 if (currentHealth <= 0)
-                    throw new DeathException(name + " has died.");
+                    throw new DeathException(name + " has died.", this);
             }
         }
 
@@ -148,9 +168,12 @@ namespace GameApplication.Abstracts
                     }
                 }
             }
-            var attackBase = currentStrength - (int)((float)currentStrength * (1f / (2f - (float)currentMastery)));
-            var attackRange = 2 * (int)((float)currentStrength * (1f / (2f - (float)currentMastery)));
+            var attackBase = currentStrength - (int)((float)currentStrength * (1f / (2f + (float)currentMastery)));
+            Console.WriteLine("attackBase" + attackBase);
+            var attackRange = 2 * (int)((float)currentStrength * (1f / (2f + (float)currentMastery)));
+            Console.WriteLine("attackRange" + attackRange);
             var damage = attackBase + rng.Next(attackRange);
+            Console.WriteLine("damage" + damage);
             return damage;
         }
 
@@ -172,8 +195,8 @@ namespace GameApplication.Abstracts
                     }
                 }
             }
-            var attackBase = currentMind - (int)((float)currentMind * (1f / (2f - (float)currentConcentration)));
-            var attackRange = 2 * (int)((float)currentMind * (1f / (2f - (float)currentConcentration)));
+            var attackBase = currentMind - (int)((float)currentMind * (1f / (2f + (float)currentConcentration)));
+            var attackRange = 2 * (int)((float)currentMind * (1f / (2f + (float)currentConcentration)));
             var damage = attackBase + rng.Next(attackRange);
             return damage;
         }
@@ -201,12 +224,15 @@ namespace GameApplication.Abstracts
 
             var debuffs = 0;
             var dots = 0;
-            foreach(Modifier mod in modsList)
+            if (modsList.Count > 0)
             {
-                if (mod.type.Equals("debuff"))
-                    debuffs++;
-                if (mod.type.Equals("Dot"))
-                    dots++;
+                foreach (Modifier mod in modsList)
+                {
+                    if (mod.type.Equals("debuff"))
+                        debuffs++;
+                    if (mod.type.Equals("Dot"))
+                        dots++;
+                }
             }
 
             if(debuffs > 2)
@@ -231,11 +257,131 @@ namespace GameApplication.Abstracts
 
         }
 
-        public abstract KeyValuePair<string, string> getAction(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus);
-        
+        public KeyValuePair<string, string> getAction(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus, List<string> actionPriority)
+        {
+            foreach (string action in actionPriority)
+            {
+                if (action.Equals("Item"))
+                {
+                    if (item != null)
+                    {
+                        foreach (KeyValuePair<string, string> status in this.getStatus())
+                        {
+                            if (item.getCondition().Equals(status.Value))
+                            {
+                                return new KeyValuePair<string, string>(name, "UsedItem");
+                            }
+
+                        }
+                    }
+                }
+                else if (action.Equals("Skill"))
+                {
+                    if (skills.Count != 0)
+                    {
+                        foreach (Skill skill in skills)
+                        {
+                            if (skill.getTarget().Equals("Enemy"))
+                            {
+                                foreach (KeyValuePair<string, string> status in enemyStatus)
+                                {
+                                    if (status.Value.Equals(skill.getCondition()))
+                                        return new KeyValuePair<string, string>(status.Key, skill.getSkill());
+                                }
+                            }
+                            if (skill.getTarget().Equals("Ally"))
+                            {
+                                foreach (KeyValuePair<string, string> status in allyStatus)
+                                {
+                                    if (status.Value.Equals(skill.getCondition()))
+                                        return new KeyValuePair<string, string>(status.Key, skill.getSkill());
+                                }
+                            }
+                            if (skill.getTarget().Equals("Self"))
+                            {
+                                foreach (KeyValuePair<string, string> status in getStatus())
+                                {
+                                    if (status.Value.Equals(skill.getCondition()))
+                                        return new KeyValuePair<string, string>(status.Key, skill.getSkill());
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (action.Equals("Heal"))
+                {
+                    foreach (KeyValuePair<string, string> status in allyStatus)
+                    {
+                        if (status.Value.Equals("Critical"))
+                            return new KeyValuePair<string, string>(status.Key, "Heal");
+                    }
+                    foreach (KeyValuePair<string, string> status in getStatus())
+                    {
+                        if (status.Value.Equals("Critical"))
+                            return new KeyValuePair<string, string>(status.Key, "Heal");
+                    }
+                    foreach (KeyValuePair<string, string> status in allyStatus)
+                    {
+                        if (status.Value.Equals("Hurt"))
+                            return new KeyValuePair<string, string>(status.Key, "Heal");
+                    }
+                    foreach (KeyValuePair<string, string> status in getStatus())
+                    {
+                        if (status.Value.Equals("Hurt"))
+                            return new KeyValuePair<string, string>(status.Key, "Heal");
+                    }
+                }
+                else if (action.Equals("PhysAttack"))
+                {
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Hurt") || status.Value.Equals("Critical"))
+                            return new KeyValuePair<string, string>(status.Key, "PhysAttack");
+                    }
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Healthy"))
+                            return new KeyValuePair<string, string>(status.Key, "PhysAttack");
+                    }
+                }
+                else if (action.Equals("MagAttack"))
+                {
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Hurt") || status.Value.Equals("Critical"))
+                            return new KeyValuePair<string, string>(status.Key, "MagAttack");
+                    }
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Healthy"))
+                            return new KeyValuePair<string, string>(status.Key, "MagAttack");
+                    }
+                }
+                else if (action.Equals("Guard"))
+                {
+                    return new KeyValuePair<string, string>(name, "Guard");
+                }
+            }
+            return new KeyValuePair<string, string>(name, getDefaultAction());
+        }
+
         public void modify(Modifier mod)
         {
             modsList.Add(mod);
         }
+
+        public abstract KeyValuePair<string, string> getAction(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus);
+
+        public abstract void defaultAction();
+
+        public abstract string getDefaultAction();
+
+        public int getSpeed()
+        {
+            return speed;
+        }
+
+        public abstract string getType();
+       
     }
 }
