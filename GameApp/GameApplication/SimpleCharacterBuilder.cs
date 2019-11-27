@@ -33,7 +33,7 @@ namespace GameApplication
             uname = uname.TrimStart(new char[] { '\0', ':' });
             try
             {
-                if(connDB.State.HasFlag(ConnectionState.Open))
+                if(!connDB.State.HasFlag(ConnectionState.Open))
                     connDB.Open();
             }
             catch (OdbcException e)
