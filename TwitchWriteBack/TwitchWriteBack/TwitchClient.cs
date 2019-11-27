@@ -143,7 +143,7 @@ namespace TwitchWriteBack
 
             try
             {
-                if (client.Available > 0 || !messageQueue.IsEmpty)
+                if (client.Available > 0 && !messageQueue.IsEmpty)
                 {
                     string msg;
                     messageQueue.TryDequeue(out msg);

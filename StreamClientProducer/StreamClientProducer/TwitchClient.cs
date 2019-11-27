@@ -160,7 +160,7 @@ namespace StreamClientProducer
 
             try
             {
-                if (client.Available > 0 || reader.Peek() >= 0)
+                if (client.Available > 0 && reader.Peek() >= 0)
                 {
 
                     var message = reader.ReadLine();
