@@ -11,6 +11,7 @@ namespace GameApplication.Agent_Dependencies
         public int value { get; }
         public int duration { get; set; }
         public string trigger { get;  }
+        public string status { get; }
 
 
         public Modifier(string type, string target, int value, int duration)
@@ -21,6 +22,15 @@ namespace GameApplication.Agent_Dependencies
             this.duration = duration;
         }
 
+        public Modifier(string type, string target, int value, int duration, string status)
+        {
+            this.type = type;
+            this.target = target;
+            this.value = value;
+            this.duration = duration;
+            this.status = status;
+        }
+
         public bool turnStart(){
             
             if (trigger.Equals("start"))
@@ -28,6 +38,17 @@ namespace GameApplication.Agent_Dependencies
             else
                 return false;
 
+        }
+
+        public bool getHealed()
+        {
+            if (trigger.Equals("healed"))
+            {
+                return true;
+
+            }
+            else
+                return false;
         }
 
         public bool attack()

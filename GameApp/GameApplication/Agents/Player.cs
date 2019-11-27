@@ -12,15 +12,15 @@ namespace GameApplication.Agents
         protected Race race { get; } 
         
 
-        public Player(int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed, Class spec, Race race, string playerName)
-           : base(playerName, baseHealth, strength, mind, concentration, mastery, skills, speed)
+        public Player(int baseHealth, int strength, int mind, int concentration, int mastery, int spirit, List<Skill> skills, int speed, Class spec, Race race, string playerName)
+           : base(playerName, baseHealth, strength, mind, concentration, mastery, spirit, skills, speed)
         {
             this.spec = spec;
             this.race = race;
         }
 
-        public Player(int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed, Class spec, Race race, string playerName, Item item)
-           : base(playerName, baseHealth, strength, mind, concentration, mastery, skills, speed, item)
+        public Player(int baseHealth, int strength, int mind, int concentration, int mastery, int spirit, List<Skill> skills, int speed, Class spec, Race race, string playerName, Item item)
+           : base(playerName, baseHealth, strength, mind, concentration, mastery, spirit, skills, speed, item)
         {
             this.spec = spec;
             this.race = race;

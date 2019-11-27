@@ -60,7 +60,7 @@ namespace GameApplication
             int charisma = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["charisma"].ToString()));
             int empathy = (int)(levelBoost * float.Parse(data.Tables[0].Rows[0]["empathy"].ToString()));
 
-            int baseHealth = race.getBaseHealth() + (int)((1f / 3f) * temper + (int)((1f / 4f) * cheer));
+            int baseHealth = race.getBaseHealth() + (int)((1f / 3f) * temper + (int)((1f / 4f) * empathy));
             Console.WriteLine("baseHealth" + baseHealth);
             int strength = race.getBaseStrength() + (int)((1f / 4f) * temper);
             Console.WriteLine("strength" + strength);
@@ -70,10 +70,11 @@ namespace GameApplication
             Console.WriteLine("mastery" + mastery);
             int concentration = (int)((1f / 2f) * charisma);
             Console.WriteLine("concentration" + concentration);
+            int spirit = race.getBaseSpirit() + (int)((1f / 3f) * cheer);
             var skills = new List<Abstracts.Skill>();
-            int speed = race.getBaseSpeed() + (int)((1f / 2f) * cheer);
+            int speed = race.getBaseSpeed() + (int)((1f / 4f) * cheer) + (int)((1f / 4f) * charisma);
             Console.WriteLine("speed" + speed);
-            Agents.Player player = new Agents.Player(baseHealth, strength, mind, concentration, mastery, skills, speed, spec, race, uname);
+            Agents.Player player = new Agents.Player(baseHealth, strength, mind, concentration, mastery, spirit, skills, speed, spec, race, uname);
             connDB.Close();
 
             return player;

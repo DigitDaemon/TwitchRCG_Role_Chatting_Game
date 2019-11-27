@@ -4,14 +4,40 @@ using System.Text;
 
 namespace GameApplication.Abstracts
 {
-    public interface Race
+    public abstract class Race
     {
-        int getBaseHealth();
+        static protected int baseHeatlh = 69;
 
-        int getBaseStrength();
+        static protected int baseMind = 13;
 
-        int getBaseMind();
+        static protected int baseStrength = 13;
 
-        int getBaseSpeed();
-    }
-}
+        static protected int baseSpirit = 13;
+
+        static protected int baseSpeed = 7;
+
+        public int getBaseHealth()
+        {
+            return baseHeatlh;
+        }
+
+        public int getBaseMind()
+        {
+            return baseMind;
+        }
+
+        public int getBaseSpeed()
+        {
+            return baseSpeed;
+        }
+
+        public int getBaseStrength()
+        {
+            return baseStrength;
+        }
+
+        public int getBaseSpirit()
+        {
+            return baseSpirit;
+        }
+    }}

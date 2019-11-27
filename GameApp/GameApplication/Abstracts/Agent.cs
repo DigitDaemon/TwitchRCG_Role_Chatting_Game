@@ -18,13 +18,14 @@ namespace GameApplication.Abstracts
         protected int baseMastery { get; }
         protected int baseArmorValue { get; }
         protected int baseWarding { get; }
+        protected int baseSpirit { get; }
         protected int speed { get; }
         private List<Modifier> modsList { get; set; }
         protected List<Skill> skills { get; }
         protected Item item;
 
 
-        public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed)
+        public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, int spirit, List<Skill> skills, int speed)
         {
             this.name = name;
             this.baseHealth = baseHealth;
@@ -33,12 +34,13 @@ namespace GameApplication.Abstracts
             this.baseMastery = mastery;
             this.baseMind = mind;
             this.baseConcentration = concentration;
+            this.baseSpirit = spirit;
             this.skills = skills;
             this.speed = speed;
             modsList = new List<Modifier>();
         }
 
-        public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed, Item item)
+        public Agent(string name, int baseHealth, int strength, int mind, int concentration, int mastery, int spirit, List<Skill> skills, int speed, Item item)
         {
             this.name = name;
             this.baseHealth = baseHealth;
@@ -47,6 +49,7 @@ namespace GameApplication.Abstracts
             this.baseMastery = mastery;
             this.baseMind = mind;
             this.baseConcentration = concentration;
+            this.baseSpirit = spirit;
             this.skills = skills;
             this.speed = speed;
             this.item = item;
@@ -185,11 +188,11 @@ namespace GameApplication.Abstracts
             {
                 if (mod.attack())
                 {
-                    if (mod.target.Equals("Strength"))
+                    if (mod.target.Equals("Mind"))
                     {
                         currentMind += mod.value;
                     }
-                    else if (mod.target.Equals("Mastery"))
+                    else if (mod.target.Equals("Concentration"))
                     {
                         currentConcentration += mod.value;
                     }
@@ -208,7 +211,17 @@ namespace GameApplication.Abstracts
 
         public List<KeyValuePair<string, string>> getStatus()
         {
-            var statusList = new List<KeyValuePair<string,string>>();
+
+            var statusList = new List<KeyValuePair<string, string>>();
+
+            foreach (Modifier mod in modsList)
+            {
+                if (mod.target.Equals("status"))
+                {
+                    statusList.Add(new KeyValuePair<string, string>(name, mod.status));
+                }
+            }
+
             if (currentHealth > (float)(baseHealth * 66))
             {
                 statusList.Add(new KeyValuePair<string,string>(name,"Healthy"));
@@ -277,36 +290,16 @@ namespace GameApplication.Abstracts
                 }
                 else if (action.Equals("Skill"))
                 {
-                    if (skills.Count != 0)
-                    {
                         foreach (Skill skill in skills)
                         {
-                            if (skill.getTarget().Equals("Enemy"))
+                            var skillcon = skill.getCondition(enemyStatus, allyStatus, getStatus());
+                            if (!skillcon.Key.Equals("false"))
                             {
-                                foreach (KeyValuePair<string, string> status in enemyStatus)
-                                {
-                                    if (status.Value.Equals(skill.getCondition()))
-                                        return new KeyValuePair<string, string>(status.Key, skill.getSkill());
-                                }
+                                return skillcon;
                             }
-                            if (skill.getTarget().Equals("Ally"))
-                            {
-                                foreach (KeyValuePair<string, string> status in allyStatus)
-                                {
-                                    if (status.Value.Equals(skill.getCondition()))
-                                        return new KeyValuePair<string, string>(status.Key, skill.getSkill());
-                                }
-                            }
-                            if (skill.getTarget().Equals("Self"))
-                            {
-                                foreach (KeyValuePair<string, string> status in getStatus())
-                                {
-                                    if (status.Value.Equals(skill.getCondition()))
-                                        return new KeyValuePair<string, string>(status.Key, skill.getSkill());
-                                }
-                            }
+                                 
                         }
-                    }
+                    
                 }
                 else if (action.Equals("Heal"))
                 {
@@ -335,7 +328,17 @@ namespace GameApplication.Abstracts
                 {
                     foreach (KeyValuePair<string, string> status in enemyStatus)
                     {
-                        if (status.Value.Equals("Hurt") || status.Value.Equals("Critical"))
+                        if (status.Value.Equals("Taunting"))
+                            return new KeyValuePair<string, string>(status.Key, "PhysAttack");
+                    }
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Vulnerable") || status.Value.Equals("Critical"))
+                            return new KeyValuePair<string, string>(status.Key, "PhysAttack");
+                    }
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Hurt"))
                             return new KeyValuePair<string, string>(status.Key, "PhysAttack");
                     }
                     foreach (KeyValuePair<string, string> status in enemyStatus)
@@ -348,7 +351,17 @@ namespace GameApplication.Abstracts
                 {
                     foreach (KeyValuePair<string, string> status in enemyStatus)
                     {
-                        if (status.Value.Equals("Hurt") || status.Value.Equals("Critical"))
+                        if (status.Value.Equals("Taunting"))
+                            return new KeyValuePair<string, string>(status.Key, "MagAttack");
+                    }
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Vulnerable") || status.Value.Equals("Critical"))
+                            return new KeyValuePair<string, string>(status.Key, "MagAttack");
+                    }
+                    foreach (KeyValuePair<string, string> status in enemyStatus)
+                    {
+                        if (status.Value.Equals("Hurt"))
                             return new KeyValuePair<string, string>(status.Key, "MagAttack");
                     }
                     foreach (KeyValuePair<string, string> status in enemyStatus)
@@ -382,6 +395,64 @@ namespace GameApplication.Abstracts
         }
 
         public abstract string getType();
-       
+
+        public int Heal()
+        {
+            var currentSpirit = baseSpirit;
+            var currentConcentration = baseConcentration;
+            foreach (Modifier mod in modsList)
+            {
+                if (mod.attack())
+                {
+                    if (mod.target.Equals("Spirit"))
+                    {
+                        currentSpirit += mod.value;
+                    }
+                    else if (mod.target.Equals("Concentration"))
+                    {
+                        currentConcentration += mod.value;
+                    }
+                }
+            }
+            var healBase = currentSpirit - (int)((float)currentSpirit * (1f / (2f + (float)currentConcentration)));
+            var healRange = 2 * (int)((float)currentSpirit * (1f / (2f + (float)currentConcentration)));
+            var heal
+ = healBase + rng.Next(healRange);
+            return heal;
+        }
+
+        public void getHealed(int healin, List<Modifier> effects)
+        {
+            var currentHealing = healin;
+            foreach (Modifier mod in modsList)
+            {
+                if (mod.getHealed())
+                {
+                     if (mod.target.Equals(""))
+                        currentHealing += mod.value;
+                }
+            }
+
+            if (effects != null)
+            {
+                foreach (Modifier mod in effects)
+                {
+                    modsList.Add(mod);
+                }
+            }
+
+            currentHealth += currentHealing;
+        }
+
+        public void useSkill(Agent target, string skillName)
+        {
+            foreach(Skill skill in skills)
+            {
+                if (skill.getName().Equals(skillName))
+                {
+                    skill.useSkill(target, this);
+                }
+            }
+        }
     }
 }

@@ -4,10 +4,19 @@ using System.Text;
 
 namespace GameApplication.Abstracts
 {
-    public interface Class
+    public abstract class Class
     {
-        Skill getBaseSkill();
+        static protected List<string> ActionPriority;
+        static protected Skill baseSkill;
 
-        List<string> getActionPriority();
+        public List<string> getActionPriority()
+        {
+            return ActionPriority;
+        }
+
+        public Skill getBaseSkill()
+        {
+            return baseSkill;
+        }
     }
 }

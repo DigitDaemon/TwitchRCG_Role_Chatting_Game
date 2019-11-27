@@ -9,8 +9,8 @@ namespace GameApplication.Abstracts
         protected int CR = 3;
         protected int Exp = 35;
 
-        public Monster(string name, int baseHealth, int strength, int mind, int concentration, int mastery, List<Skill> skills, int speed, int CR, int Exp)
-            :base(name, baseHealth, strength, mind, concentration, mastery, skills, speed)
+        public Monster(string name, int baseHealth, int strength, int mind, int concentration, int mastery, int spirit, List<Skill> skills, int speed, int CR, int Exp)
+            :base(name, baseHealth, strength, mind, concentration, mastery, spirit, skills, speed)
         {
             this.CR = CR;
             this.Exp = Exp;

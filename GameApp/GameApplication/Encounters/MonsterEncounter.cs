@@ -96,7 +96,7 @@ namespace GameApplication
                 action = currentAgent.getAction(getPlayersCondition(currentAgent.getName()), getMonstersCondition(currentAgent.getName()));
             }
 
-            if(action.Value.Equals("PhysAttack"))
+            if (action.Value.Equals("PhysAttack"))
             {
                 Console.WriteLine(currentAgent.getName() + " is physically attacking " + action.Key);
                 messages.Add(currentAgent.getName() + " is physically attacking " + action.Key);
@@ -165,9 +165,56 @@ namespace GameApplication
                     checkCompletion(messages);
                 }
             }
+            else if (action.Value.Equals("Heal"))
+            {
+                Console.WriteLine(currentAgent.getName() + " is healing " + action.Key + ".");
+                messages.Add(currentAgent.getName() + " is healing " + action.Key + ".");
+                if (currentAgent.getType().Equals("Player"))
+                {
+                    playerList.Find(x => x.getName().Equals(action.Key)).getHealed(currentAgent.Heal(), null);
+                }
+                else
+                {
+                    monsters.Find(x => x.getName().Equals(action.Key)).getHealed(currentAgent.Heal(), null);
+                }
+            }
+            else if (action.Value.Contains("Skill"))
+            {
+                var target = action.Key.Substring(0, action.Key.IndexOf(" "));
+                var type = action.Key.Substring(action.Key.IndexOf(" "), action.Key.Length - target.Length).Trim();
+                var skillname = action.Value.Substring(0, action.Value.IndexOf(" "));
+                try
+                {
+                    if (type.Equals("Monster"))
+                    {
+                        currentAgent.useSkill(monsters.Find(x => x.getName().Equals(target)), skillname);
+                    }
+                    else
+                    {
+                        currentAgent.useSkill(playerList.Find(x => x.getName().Equals(target)), skillname);
+                    }
+                }
+                catch (Exceptions.DeathException death)
+                {
+                    if (death.getObject().getType().Equals("Player"))
+                    {
+                        deadPlayers.Add(death.getObject());
+                        playerList.RemoveAt(playerList.IndexOf(death.getObject()));
+                        Console.WriteLine(death.Message);
+                        messages.Add(death.Message);
+                    }
+                    else
+                    {
+                        deadMonsters.Add(death.getObject());
+                        monsters.RemoveAt(monsters.IndexOf(death.getObject()));
+                        Console.WriteLine(death.Message);
+                        messages.Add(death.Message);
+                    }
+                    checkCompletion(messages);
+                }
+            }
 
-
-            return messages;
+                return messages;     
         }
 
         public void fillTurnList()
