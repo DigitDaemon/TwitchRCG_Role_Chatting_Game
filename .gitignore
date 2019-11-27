@@ -261,7 +261,7 @@ __pycache__/
 *.pyc
 
 #Sensitive Data
-Data/*
+Data/
 
 #Documentation configuration
 NatDocs_config/
