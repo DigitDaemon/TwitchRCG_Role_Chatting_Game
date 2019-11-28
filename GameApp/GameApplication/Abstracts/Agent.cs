@@ -216,7 +216,7 @@ namespace GameApplication.Abstracts
 
             foreach (Modifier mod in modsList)
             {
-                if (mod.target.Equals("status"))
+                if (mod.getStatus())
                 {
                     statusList.Add(new KeyValuePair<string, string>(name, mod.status));
                 }
@@ -241,7 +241,7 @@ namespace GameApplication.Abstracts
             {
                 foreach (Modifier mod in modsList)
                 {
-                    if (mod.type.Equals("debuff"))
+                    if (mod.type.Equals("Debuff"))
                         debuffs++;
                     if (mod.type.Equals("Dot"))
                         dots++;

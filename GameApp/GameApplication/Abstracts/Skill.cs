@@ -4,36 +4,15 @@ using System.Text;
 
 namespace GameApplication.Abstracts
 {
-    public abstract class Skill
+    public interface Skill
     {
-        internal object getCondition()
-        {
-            throw new NotImplementedException();
-        }
+        string getSkill();
 
-        internal object getTarget()
-        {
-            throw new NotImplementedException();
-        }
+        KeyValuePair<string, string> getCondition(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus, List<KeyValuePair<string, string>> selfStatus);
 
-        internal string getSkill()
-        {
-            throw new NotImplementedException();
-        }
+        string getName();
 
-        public KeyValuePair<string, string> getCondition(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus, List<KeyValuePair<string, string>> list)
-        {
-            return new KeyValuePair<string, string>("false","");
-        }
-
-        internal object getName()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void useSkill(Agent target, Agent agent)
-        {
-            throw new NotImplementedException();
-        }
+        void useSkill(Agent target, Agent agent);
+       
     }
 }

@@ -14,21 +14,29 @@ namespace GameApplication.Agent_Dependencies
         public string status { get; }
 
 
-        public Modifier(string type, string target, int value, int duration)
+        public Modifier(string type, string trigger, string target, int value, int duration)
         {
             this.type = type;
+            this.trigger = trigger;
             this.target = target;
             this.value = value;
             this.duration = duration;
         }
 
-        public Modifier(string type, string target, int value, int duration, string status)
+        public Modifier(string type, string trigger, int duration, string status)
         {
             this.type = type;
-            this.target = target;
-            this.value = value;
+            this.trigger = trigger;
             this.duration = duration;
             this.status = status;
+        }
+
+        public bool getStatus()
+        {
+            if (trigger.Equals("status"))
+                return true;
+            else
+                return false;
         }
 
         public bool turnStart(){

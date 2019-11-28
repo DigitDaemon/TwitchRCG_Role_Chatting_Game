@@ -14,13 +14,13 @@ namespace GameApplication.Classes
     class Sorcerer : Class
     {
         static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "MagAttack", "Guard" };
-        static new Skill baseSkill = null;
+        static new Skill baseSkill = new Skills.Fireball();
     }
 
     class Barbarian : Class
     {
         static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "PhysAttack", "Guard" };
-        static new Skill baseSkill = null;
+        static new Skill baseSkill = new Skills.AttackRecklessly();
     }
 
     class Paladin : Class
