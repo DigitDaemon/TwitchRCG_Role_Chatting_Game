@@ -62,7 +62,7 @@ namespace GameApplication.Builders
             //[0] = highest stat
             //[1] = second highest stat
             //[2] = lowest stat
-            int[] statpicks = new int[] { 0, 0, 0 };
+            int[] statpicks = new int[] { 0, 1, 0 };
 
             int[] stats = new int[] { temper, cheer, curiosity, charisma, empathy };
 
@@ -82,6 +82,15 @@ namespace GameApplication.Builders
                 {
                     statpicks[2] = i;
                 }
+            }
+
+            foreach(int stat in stats)
+            {
+                Console.WriteLine(stat);
+            }
+            foreach(int pick in statpicks)
+            {
+                Console.WriteLine(pick);
             }
 
             if ((statpicks[0] == 0 && statpicks[1] == 1) || (statpicks[0] == 1 && statpicks[1] == 0))
@@ -105,6 +114,8 @@ namespace GameApplication.Builders
             else 
                 spec = new Classes.Rogue();
 
+            Console.WriteLine(spec.getName());
+
             if ((statpicks[0] == 1 && statpicks[2] == 0))
                 race = new Races.Halfling();
             else if ((statpicks[0] == 0 && statpicks[2] == 3))
@@ -125,22 +136,25 @@ namespace GameApplication.Builders
             else
                 race = new Races.Human();
 
+           
+
             int baseHealth = race.getBaseHealth() + (int)((1f / 3f) * temper + (int)((1f / 4f) * empathy));
-            Console.WriteLine("baseHealth" + baseHealth);
+            //Console.WriteLine("baseHealth" + baseHealth);
             int strength = race.getBaseStrength() + (int)((1f / 4f) * temper);
-            Console.WriteLine("strength" + strength);
+            //Console.WriteLine("strength" + strength);
             int mind = race.getBaseMind() + (int)((1f / 3f) * curiosity);
-            Console.WriteLine("mind" + mind);
+            //Console.WriteLine("mind" + mind);
             int mastery = (int)((1f / 2f) * empathy);
-            Console.WriteLine("mastery" + mastery);
+            //Console.WriteLine("mastery" + mastery);
             int concentration = (int)((1f / 2f) * charisma);
-            Console.WriteLine("concentration" + concentration);
+            //Console.WriteLine("concentration" + concentration);
             int spirit = race.getBaseSpirit() + (int)((1f / 3f) * cheer);
             var skills = new List<Abstracts.Skill>();
             if (spec.getBaseSkill() != null)
                 skills.Add(spec.getBaseSkill());
             int speed = race.getBaseSpeed() + (int)((1f / 4f) * cheer) + (int)((1f / 4f) * charisma);
-            Console.WriteLine("speed" + speed);
+            //Console.WriteLine("speed" + speed);
+
             Agents.Player player = new Agents.Player(baseHealth, strength, mind, concentration, mastery, spirit, skills, speed, spec, race, uname);
             connDB.Close();
 

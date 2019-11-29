@@ -274,6 +274,8 @@ namespace GameApplication.Abstracts
         {
             foreach (string action in actionPriority)
             {
+                Console.WriteLine(action);
+
                 if (action.Equals("Item"))
                 {
                     if (item != null)
@@ -292,7 +294,9 @@ namespace GameApplication.Abstracts
                 {
                         foreach (Skill skill in skills)
                         {
+                            Console.WriteLine(skill.getName());
                             var skillcon = skill.getCondition(enemyStatus, allyStatus, getStatus());
+                        Console.WriteLine(skillcon.Key + " " + skillcon.Value);
                             if (!skillcon.Key.Equals("false"))
                             {
                                 return skillcon;

@@ -26,7 +26,7 @@ namespace TwitchWriteBack
         //lengthMin - the minumum size of a message to be passed into the system.
         const int ALLOWABLE_FAILURES = 10;
         const int RESET_CYCLES = 100;
-        private const string username = "digitdbot";
+        private const string username = "ddigitbot";
         private static string path = Path.Combine(Environment.CurrentDirectory.Replace(@"bin\Debug\netcoreapp2.1", ""), @"Data\");
         private static string password = File.ReadAllText(Path.Combine(path, "Token.txt"));//do not push this!!!
         
@@ -68,8 +68,9 @@ namespace TwitchWriteBack
             this.messageQueue = queue;
             this.channel = channel;
             this.trigger = trigger;
-            
-            messageTemplate = $":{channel}!{channel}@{channel}.tmi.twitch.tv PRIVMSG #{channel} : ";
+
+            messageTemplate = $":{username}!{username}@{username}.tmi.twitch.tv PRIVMSG #{channel} : ";
+            //messageTemplate = $"PRIVMSG #{channel} :";
             Console.WriteLine("Channel Thread " + channel + " start");
             Connect();
             trigger.Elapsed += onTick;
@@ -143,12 +144,13 @@ namespace TwitchWriteBack
 
             try
             {
-                if (client.Available > 0 && !messageQueue.IsEmpty)
+                if (!messageQueue.IsEmpty)
                 {
                     string msg;
-                    messageQueue.TryDequeue(out msg);
+                    var ready = messageQueue.TryDequeue(out msg);
                     var message = messageTemplate + msg;
                     writer.WriteLine(message);
+                    writer.Flush();
                 }
                 else
                 {

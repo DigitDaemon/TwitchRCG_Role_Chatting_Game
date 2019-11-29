@@ -33,8 +33,8 @@ namespace GameApplication.Agents
 
         public void guard()
         {
-                modify(new Modifier("Buff", "Armour", 2, 2));
-                modify(new Modifier("Buff", "Warding", 2, 2));
+                modify(new Modifier("Buff", "defend", "Armour", 2, 2));
+                modify(new Modifier("Buff", "defend", "Warding", 2, 2));
             
         }
 

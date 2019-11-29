@@ -27,7 +27,7 @@ namespace GameApplication
             open = true;
             gameOver = false;
 
-            joinPeriod = new System.Timers.Timer(60000);
+            joinPeriod = new System.Timers.Timer(1000);//change this back
             joinPeriod.Elapsed += closeJoin;
             joinPeriod.Enabled = true;
             Console.WriteLine("EncounterController created" + channel);

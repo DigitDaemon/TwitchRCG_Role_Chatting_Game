@@ -6,19 +6,28 @@ namespace GameApplication.Abstracts
 {
     public abstract class Race
     {
-        static protected int baseHeatlh = 69;
+        protected int baseHealth = 69;
 
-        static protected int baseMind = 13;
+        protected int baseMind = 13;
 
-        static protected int baseStrength = 13;
+        protected int baseStrength = 13;
 
-        static protected int baseSpirit = 13;
+        protected int baseSpirit = 13;
 
-        static protected int baseSpeed = 7;
+        protected int baseSpeed = 7;
+
+        public Race(int baseHealth, int baseMind, int baseStrength, int baseSpirit, int baseSpeed)
+        {
+            this.baseHealth = baseHealth;
+            this.baseMind = baseMind;
+            this.baseStrength = baseStrength;
+            this.baseSpirit = baseSpirit;
+            this.baseSpeed = baseSpeed;
+        }
 
         public int getBaseHealth()
         {
-            return baseHeatlh;
+            return baseHealth;
         }
 
         public int getBaseMind()

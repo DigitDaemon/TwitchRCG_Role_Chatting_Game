@@ -7,71 +7,86 @@ namespace GameApplication.Classes
 {
     class Fighter : Class
     {
-        static new string name = "Fighter";
-        static new List<string> ActionPriority = new List<string>() { "Item","Skill","PhysAttack","Guard"};
-        static new Skill baseSkill = new Skills.PowerAttack();
+        public Fighter()
+            : base(new List<string>() { "Item", "Skill", "PhysAttack", "Guard" }, new Skills.PowerAttack(), "Fighter")
+        {
+
+        }
     }
 
     class Sorcerer : Class
     {
-        static new string name = "Sorcerer";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "MagAttack", "Guard" };
-        static new Skill baseSkill = new Skills.Fireball();
+        public Sorcerer() : base(new List<string>() { "Item", "Skill", "MagAttack", "Guard" }, new Skills.Fireball(), "Sorcerer")
+        {
+
+        }
+       
     }
 
     class Barbarian : Class
     {
-        static new string name = "Barbarian";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "PhysAttack", "Guard" };
-        static new Skill baseSkill = new Skills.AttackRecklessly();
+        public Barbarian() : base(new List<string>() { "Item", "Skill", "PhysAttack", "Guard" }, new Skills.AttackRecklessly(), "Barbarian") {
+        }
+        
     }
 
     class Paladin : Class
     {
-        static new string name = "Paladin";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "PhysAttack", "Guard" };
-        static new Skill baseSkill = new Skills.LightOfSalvation();
+        public Paladin() : base( new List<string>() { "Item", "Skill", "PhysAttack", "Guard" }, new Skills.LightOfSalvation(), "Paladin")
+        {
+
+        }
+        
     }
 
     class Bard : Class
     {
-        static new string name = "Bard";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "Heal", "MagAttack", "Guard" };
-        static new Skill baseSkill = null;
+        public Bard():base(new List<string>() { "Item", "Skill", "Heal", "MagAttack", "Guard" }, null, "Bard")
+        {
+
+        }
+        
     }
 
     class Rogue : Class
     {
-        static new string name = "Rogue";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "PhysAttack", "Guard" };
-        static new Skill baseSkill = null;
+        public Rogue():base(new List<string>() { "Item", "Skill", "PhysAttack", "Guard" },null, "Rogue")
+        {
+
+        }
     }
 
     class Wizard : Class
     {
-        static new string name = "Wizard";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "MagAttack", "Guard" };
-        static new Skill baseSkill = null;
+        public Wizard():base(new List<string>() { "Item", "Skill", "MagAttack", "Guard" },null, "Wizard")
+        {
+
+        }
     }
 
     class Warlock : Class
     {
-        static new string name = "Warlock";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "MagAttack", "Guard" };
-        static new Skill baseSkill = null;
+        public Warlock():base(new List<string>() { "Item", "Skill", "MagAttack", "Guard" },null, "Warlock")
+        {
+
+        }
+        
     }
 
     class Cleric : Class
     {
-        static new string name = "Cleric";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "Heal", "PhysAttack", "Guard" };
-        static new Skill baseSkill = null;
+        public Cleric() : base(new List<string>() { "Item", "Skill", "Heal", "PhysAttack", "Guard" }, null, "Cleric")
+        {
+
+        }
+        
     }
 
     class Druid : Class
     {
-        static new string name = "Druid";
-        static new List<string> ActionPriority = new List<string>() { "Item", "Skill", "MagAttack", "Guard" };
-        static new Skill baseSkill = null;
+        public Druid() : base(new List<string>() { "Item", "Skill", "MagAttack", "Guard" }, null, "Druid")
+        {
+
+        }
     }
 }

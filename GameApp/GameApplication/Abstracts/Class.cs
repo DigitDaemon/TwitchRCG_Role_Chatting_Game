@@ -6,9 +6,17 @@ namespace GameApplication.Abstracts
 {
     public abstract class Class
     {
-        static protected List<string> ActionPriority;
-        static protected Skill baseSkill;
-        static protected string name;
+        protected List<string> ActionPriority;
+        protected Skill baseSkill;
+        protected string name;
+
+        public Class(List<string> ActionPriority, Skill baseSkill, string name)
+        {
+            this.ActionPriority = ActionPriority;
+            this.baseSkill = baseSkill;
+            this.name = name;
+        }
+
 
         public string getName()
         {
