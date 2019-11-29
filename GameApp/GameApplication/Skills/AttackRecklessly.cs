@@ -48,19 +48,23 @@ namespace GameApplication.Skills
             throw new NotImplementedException();
         }
 
-        public void useSkill(Agent target, Agent agent)
+        public string useSkill(Agent target, Agent agent)
         {
-            UseSkill(target, agent);
+            return UseSkill(target, agent);
         }
 
-        static public void UseSkill(Agent target, Agent agent)
+        static public string UseSkill(Agent target, Agent agent)
         {
+            var outstring = agent.getName() + " is attacking " + target.getName() + " recklessly.";
+
             target.TakeDamage(agent.physAttack(), "Physical", null);
             target.TakeDamage(agent.physAttack(), "Physical", null);
 
             agent.modify(new Agent_Dependencies.Modifier("Debuff", "status", 2, "Vulnerable"));
             agent.modify(new Agent_Dependencies.Modifier("Debuff", "defend", "Armour", -2, 2));
             agent.modify(new Agent_Dependencies.Modifier("Debuff", "defend", "Warding", -2, 2));
+
+            return outstring;
         }
     }
 }

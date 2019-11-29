@@ -12,7 +12,7 @@ namespace GameApplication.Abstracts
 
         string getName();
 
-        void useSkill(Agent target, Agent agent);
+        string useSkill(Agent target, Agent agent);
        
     }
 }

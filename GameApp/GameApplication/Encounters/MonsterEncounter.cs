@@ -187,11 +187,11 @@ namespace GameApplication
                 {
                     if (type.Equals("Monster"))
                     {
-                        currentAgent.useSkill(monsters.Find(x => x.getName().Equals(target)), skillname);
+                        messages.Add(currentAgent.useSkill(monsters.Find(x => x.getName().Equals(target)), skillname));
                     }
                     else
                     {
-                        currentAgent.useSkill(playerList.Find(x => x.getName().Equals(target)), skillname);
+                        messages.Add(currentAgent.useSkill(playerList.Find(x => x.getName().Equals(target)), skillname));
                     }
                 }
                 catch (Exceptions.DeathException death)

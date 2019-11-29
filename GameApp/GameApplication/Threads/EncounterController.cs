@@ -89,7 +89,7 @@ namespace GameApplication
                 if (!Players.Exists(x => x.getName().Equals(uname))) {
                     try
                     {
-                        Players.Add(SimpleCharacterBuilder.buildCharacter(uname));
+                        Players.Add(Builders.CharacterBuilder.buildCharacter(uname));
                     }
                     catch (Exceptions.NoSuchPlayerException nsp)
                     {

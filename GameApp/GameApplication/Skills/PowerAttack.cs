@@ -5,9 +5,9 @@ using System.Text;
 
 namespace GameApplication.Skills
 {
-    class Fireball : Skill
+    class PowerAttack : Skill
     {
-        static string name = "Fireball";
+        static string name = "PowerAttack";
 
         public KeyValuePair<string, string> getCondition(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus, List<KeyValuePair<string, string>> selfStatus)
         {
@@ -16,14 +16,14 @@ namespace GameApplication.Skills
 
         static public KeyValuePair<string, string> GetCondition(List<KeyValuePair<string, string>> enemyStatus, List<KeyValuePair<string, string>> allyStatus, List<KeyValuePair<string, string>> selfStatus)
         {
-            if (!selfStatus.Exists(x => x.Value.Equals("Tapped")))
+            if (!selfStatus.Exists(x => x.Value.Equals("Critical")))
             {
                 if (enemyStatus.Exists(x => x.Value.Equals("Taunting")))
                     return new KeyValuePair<string, string>(enemyStatus.Find(x => x.Value.Equals("Taunting")).Key + " Monster", GetName() + " Skill");
                 foreach (KeyValuePair<string, string> enemyCon in enemyStatus)
                 {
-                        if (enemyCon.Value.Equals("Critical") || enemyCon.Value.Equals("Vulnerable"))
-                            return new KeyValuePair<string, string>(enemyCon.Key + " Monster", GetName() + " Skill");
+                    if (enemyCon.Value.Equals("Critical") || enemyCon.Value.Equals("Vulnerable"))
+                        return new KeyValuePair<string, string>(enemyCon.Key + " Monster", GetName() + " Skill");
                 }
                 foreach (KeyValuePair<string, string> enemyCon in enemyStatus)
                 {
@@ -62,11 +62,11 @@ namespace GameApplication.Skills
 
         static public string UseSkill(Agent target, Agent agent)
         {
-            var outstring = agent.getName() + " is throwing a fireball at " + target.getName() + ".";
+            var outstring = agent.getName() + " is using a Power Attack on " + target.getName() + ".";
 
-            target.TakeDamage(agent.physAttack(), "Magical", null);
-            target.modify(new Agent_Dependencies.Modifier("Dot", "start", "Health", -10, 4));
-            agent.modify(new Agent_Dependencies.Modifier("Debuff", "status", 2, "Tapped"));
+            agent.modify(new Agent_Dependencies.Modifier("Buff", "attack", "Strength", 4, 1));
+            agent.modify(new Agent_Dependencies.Modifier("Debuff", "attack", "Mastery", -2, 1));
+            target.TakeDamage(agent.physAttack(), "Physical", null);
 
             return outstring;
         }

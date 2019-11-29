@@ -12,7 +12,7 @@ namespace GameApplication.Agents
         static List<string> actionPriority = new List<string>(){ "PhysAttack" };
 
         public DireWolf(int UnId, int speed)
-            : base("DireWolf "+UnId,120,30,0,0,1,0,new List<Abstracts.Skill>(),baseSpeed + speed, 3, 35)
+            : base("Dire_Wolf_"+UnId,120,30,0,0,1,0,new List<Abstracts.Skill>(),baseSpeed + speed, 3, 35)
         {
         }
 

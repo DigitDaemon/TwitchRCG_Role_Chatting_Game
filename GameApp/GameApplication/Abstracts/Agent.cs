@@ -444,15 +444,17 @@ namespace GameApplication.Abstracts
             currentHealth += currentHealing;
         }
 
-        public void useSkill(Agent target, string skillName)
+        public string useSkill(Agent target, string skillName)
         {
             foreach(Skill skill in skills)
             {
                 if (skill.getName().Equals(skillName))
                 {
-                    skill.useSkill(target, this);
+                    return skill.useSkill(target, this);
                 }
             }
+
+            return "";
         }
     }
 }

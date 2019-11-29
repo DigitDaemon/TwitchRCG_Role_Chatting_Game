@@ -12,7 +12,7 @@ namespace GameApplication.Agents
         static List<string> actionPriority = new List<string>() { "Heal", "MagAttack" };
 
         public SkeletonPriest(int UnId, int speed)
-            : base("SkeletonPriest " + UnId, 80, 2, 25, 3, 0, 15, new List<Abstracts.Skill>(), baseSpeed + speed, 2, 30)
+            : base("Skeleton_Priest_" + UnId, 80, 2, 25, 3, 0, 15, new List<Abstracts.Skill>(), baseSpeed + speed, 2, 30)
         {
         }
 

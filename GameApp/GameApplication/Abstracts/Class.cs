@@ -8,6 +8,12 @@ namespace GameApplication.Abstracts
     {
         static protected List<string> ActionPriority;
         static protected Skill baseSkill;
+        static protected string name;
+
+        public string getName()
+        {
+            return name;
+        }
 
         public List<string> getActionPriority()
         {

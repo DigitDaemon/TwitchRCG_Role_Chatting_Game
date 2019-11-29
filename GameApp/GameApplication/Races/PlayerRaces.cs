@@ -76,4 +76,13 @@ namespace GameApplication.Races
         static new int baseSpirit = 19;
         static new int baseSpeed = 12;
     }
+
+    class Drow : Race
+    {
+        static new int baseHeatlh = 60;
+        static new int baseMind = 15;
+        static new int baseStrength = 10;
+        static new int baseSpirit = 11;
+        static new int baseSpeed = 13;
+    }
 }
