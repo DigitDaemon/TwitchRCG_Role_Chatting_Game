@@ -136,8 +136,8 @@ namespace GameApplication
             }
             else if (action.Value.Equals("MagAttack"))
             {
-                Console.WriteLine(currentAgent.getName() + " is attacking " + action.Key + "with magic");
-                messages.Add(currentAgent.getName() + " is attacking " + action.Key + "with magic");
+                Console.WriteLine(currentAgent.getName() + " is attacking " + action.Key + " with magic");
+                messages.Add(currentAgent.getName() + " is attacking " + action.Key + " with magic");
 
                 try
                 {

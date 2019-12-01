@@ -83,6 +83,12 @@ namespace GameApplication
                     AddJoinGame(message);
                 }
 
+                if (encounters.Exists(x => x.Value.gameOver))
+                {
+                    encounters.Remove(encounters.Find(x => x.Value.gameOver));
+                }
+
+
             }
 
         }
@@ -95,9 +101,16 @@ namespace GameApplication
             if (encounters.Exists(x => x.Key == channel))
             {
                 encounters.Find(x => x.Key == channel).Value.AddPlayer(uname);
+
             }
             else if(!cooldownList.Exists(x => x.Key == channel)) { 
-                    startEncounter(message);
+                startEncounter(message);
+                twitchOutQueue.Enqueue(new KeyValuePair<string, string>(channel, $"@{uname} is starting a quest! type '!dQuest' to join the party!"));
+                discordOutQueue.Enqueue(new KeyValuePair<string, string>(channel, $"{uname} is starting a quest in {channel}!"));
+            }
+            else
+            {
+                twitchOutQueue.Enqueue(new KeyValuePair<string, string>(channel, $"@{uname}, {channel}'s guild is currently recovering from their last quest."));
             }
             
 
@@ -137,10 +150,6 @@ namespace GameApplication
                 {
                     cooldownList[i].Value.Elapsed -= cooldownEnded;
                     cooldownList[i].Value.Dispose();
-                    if (encounters.Exists(x => x.Key.Equals(cooldownList[i].Key)) && encounters.Exists(x => x.Value.gameOver))
-                    {
-                        encounters.Remove(encounters.Find(x => x.Key.Equals(cooldownList[i].Key)));
-                    }
                     twitchOutQueue.Enqueue(new KeyValuePair<string, string>(cooldownList[i].Key, "There is a new Quest posted! Start your adventure by typing in '!dQuest' into chat."));
                     cooldownList.Remove(cooldownList.Find(x => x.Key.Equals(cooldownList[i].Key)));
                    

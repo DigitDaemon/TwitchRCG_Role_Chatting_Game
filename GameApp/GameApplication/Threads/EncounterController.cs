@@ -27,7 +27,7 @@ namespace GameApplication
             open = true;
             gameOver = false;
 
-            joinPeriod = new System.Timers.Timer(1000);//change this back
+            joinPeriod = new System.Timers.Timer(60000);//change this back
             joinPeriod.Elapsed += closeJoin;
             joinPeriod.Enabled = true;
             Console.WriteLine("EncounterController created" + channel);
@@ -39,6 +39,8 @@ namespace GameApplication
             open = false;
             joinPeriod.Elapsed -= closeJoin;
             joinPeriod.Dispose();
+            enqueTwitch("The party is leaving for the quest, wish them luck!");
+            enqueDiscord("The party is leaving for the quest, wish them luck!");
         }
 
         public void encounterThread()
@@ -58,18 +60,19 @@ namespace GameApplication
                     {
                         discordOutQueue.Enqueue(new KeyValuePair<string,string>(channel,message));
                     }
+                    Thread.Sleep(2000);
                 }
                 catch(Exceptions.GameOverException go)
                 {
-                    gameOver = true;
                     foreach(string message in go.getMessages())
                     {
                         discordOutQueue.Enqueue(new KeyValuePair<string, string>(channel, message));
                     }
+                    gameOver = true;
                 }
             }
-            twitchOutQueue.Enqueue(new KeyValuePair<string,string>(channel,encounter.endEncounter()));
-
+            enqueTwitch(encounter.endEncounter());
+            enqueDiscord(encounter.endEncounter());
         }
 
         public void enqueTwitch(string message)
@@ -93,11 +96,15 @@ namespace GameApplication
                     }
                     catch (Exceptions.NoSuchPlayerException nsp)
                     {
-                        twitchOutQueue.Enqueue(new KeyValuePair<string, string>(channel, "@" + uname + " You are not currently registered in TwitchRCG. "
-                            + "You can register by typing '!dJoin' into chat."));
+                        enqueTwitch($"@{uname}You are not currently registered in TwitchRCG. You can register by typing '!dJoin' into chat.");
                     }
                 }
             }
+            else
+            {
+                enqueTwitch($"Sorry @{uname} the party has already left.");
+            }
+            enqueDiscord($"{uname} has joined {channel} guild's party!");
         }
     }
 }

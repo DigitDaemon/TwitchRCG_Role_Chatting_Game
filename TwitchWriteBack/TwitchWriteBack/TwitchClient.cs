@@ -26,6 +26,7 @@ namespace TwitchWriteBack
         //lengthMin - the minumum size of a message to be passed into the system.
         const int ALLOWABLE_FAILURES = 10;
         const int RESET_CYCLES = 100;
+        private System.Timers.Timer messageCooldown;
         private const string username = "ddigitbot";
         private static string path = Path.Combine(Environment.CurrentDirectory.Replace(@"bin\Debug\netcoreapp2.1", ""), @"Data\");
         private static string password = File.ReadAllText(Path.Combine(path, "Token.txt"));//do not push this!!!
@@ -68,6 +69,8 @@ namespace TwitchWriteBack
             this.messageQueue = queue;
             this.channel = channel;
             this.trigger = trigger;
+            messageCooldown = new System.Timers.Timer(2000);
+            messageCooldown.AutoReset = false;
 
             messageTemplate = $":{username}!{username}@{username}.tmi.twitch.tv PRIVMSG #{channel} : ";
             //messageTemplate = $"PRIVMSG #{channel} :";
@@ -144,13 +147,14 @@ namespace TwitchWriteBack
 
             try
             {
-                if (!messageQueue.IsEmpty)
+                if (!messageQueue.IsEmpty && messageCooldown.Enabled == false)
                 {
                     string msg;
                     var ready = messageQueue.TryDequeue(out msg);
                     var message = messageTemplate + msg;
                     writer.WriteLine(message);
                     writer.Flush();
+                    messageCooldown.Enabled = true;
                 }
                 else
                 {
